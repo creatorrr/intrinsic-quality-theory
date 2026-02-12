@@ -157,3 +157,25 @@ Three reading paths:
 ## License
 
 [MIT](./LICENSE) | Diwank Singh Tomer | diwank@julep.ai
+
+## Persistent Diamonds v3 Package
+
+This repo now includes an executable Python package for the `persistent_diamonds_v3.docx` architecture program:
+
+- Package path: `src/persistent_diamonds_v3`
+- Build config: `pyproject.toml` (uv-managed)
+- CLI entrypoint: `pdv3`
+
+Quickstart:
+
+```bash
+uv sync
+uv run pdv3 init-config
+uv run pdv3 prepare-data --objective mixed
+uv run pdv3 train-stage1
+uv run pdv3 train-stage2
+uv run pdv3 train-distill
+uv run pdv3 evaluate
+```
+
+The Stage 3 distillation path is configured to use `Qwen/Qwen3-8B` as the report-head teacher by default, with fallback support in `pdv3.yaml`.
