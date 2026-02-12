@@ -10,6 +10,7 @@ from tqdm.auto import tqdm
 
 from persistent_diamonds_v3.config import Stage2LossWeights
 from persistent_diamonds_v3.models import DiscreteNarrator, ModularSSMWorldModel
+from persistent_diamonds_v3.models.control_head import ControlHead
 
 
 @dataclass(slots=True)
@@ -73,10 +74,14 @@ class Stage2ShapingTrainer:
         learning_rate: float,
         weight_decay: float,
         device: str,
+        control_head: ControlHead | None = None,
+        control_weight: float = 0.5,
     ):
         self.device = torch.device(device)
         self.world_model = world_model.to(self.device)
         self.narrator = narrator.to(self.device)
+        self.control_head = control_head.to(self.device) if control_head is not None else None
+        self.control_weight = control_weight
         self.weights = stage2_weights
         self.narrator_update_stride = max(1, int(round(world_step_hz / max(1, narrator.update_hz))))
 
@@ -107,13 +112,19 @@ class Stage2ShapingTrainer:
             nn.Linear(narrator.hidden_dim, latent_dim),
         ).to(self.device)
 
-        self.optimizer = torch.optim.AdamW(
+        params = (
             list(self.world_model.parameters())
             + list(self.narrator.parameters())
             + list(self.task_head.parameters())
             + list(self.obs_predictor.parameters())
             + list(self.world_self_predictor.parameters())
-            + list(self.rd_decoder.parameters()),
+            + list(self.rd_decoder.parameters())
+        )
+        if self.control_head is not None:
+            params += list(self.control_head.parameters())
+
+        self.optimizer = torch.optim.AdamW(
+            params,
             lr=learning_rate,
             weight_decay=weight_decay,
         )
@@ -261,6 +272,22 @@ class Stage2ShapingTrainer:
                 world_sp = self.world_self_predictor(world_states[:, :-1])
                 loss_sp_w = F.mse_loss(world_sp, world_states[:, 1:].detach())
 
+                # Control head loss: action-entropy regularised value prediction.
+                # The control head receives narrator state ONLY (no-bypass).
+                if self.control_head is not None:
+                    ctrl = self.control_head(narrator_state)
+                    # Value prediction trained against task signal magnitude.
+                    loss_ctrl = F.mse_loss(
+                        ctrl.value_estimate,
+                        task_signal.mean(dim=-1, keepdim=True).expand_as(ctrl.value_estimate),
+                    )
+                    # Entropy bonus: encourage exploration in action space.
+                    action_probs = F.softmax(ctrl.action_logits, dim=-1)
+                    action_entropy = -(action_probs * torch.log(action_probs + 1e-8)).sum(dim=-1).mean()
+                    loss_ctrl = loss_ctrl - 0.01 * action_entropy
+                else:
+                    loss_ctrl = world_states.new_tensor(0.0)
+
                 total = (
                     self.weights.jepa * loss_jepa
                     + self.weights.task * loss_task
@@ -270,6 +297,7 @@ class Stage2ShapingTrainer:
                     + self.weights.rate_distortion * loss_rd
                     + self.weights.selfpred_narrator * loss_sp_n
                     + self.weights.selfpred_world * loss_sp_w
+                    + self.control_weight * loss_ctrl
                 )
 
                 self.optimizer.zero_grad(set_to_none=True)
