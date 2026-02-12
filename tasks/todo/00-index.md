@@ -17,7 +17,7 @@
 - Phase 5 depends on Phases 1-3 being stable enough to scale without churn.
 
 ## Status
-- [ ] Phase 0
+- [x] Phase 0
 - [ ] Phase 1
 - [ ] Phase 2
 - [ ] Phase 3
