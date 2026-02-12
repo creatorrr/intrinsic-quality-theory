@@ -9,7 +9,7 @@ import typer
 from persistent_diamonds_v3.config import PersistentDiamondsConfig
 from persistent_diamonds_v3.data import IQTObjectiveDataStore, ObjectiveRequest, ObjectiveTensorDataset
 from persistent_diamonds_v3.evaluation import compute_iqt_bundle
-from persistent_diamonds_v3.models import DiscreteNarrator, ModularSSMWorldModel, ReportHead
+from persistent_diamonds_v3.models import ControlHead, DiscreteNarrator, ModularSSMWorldModel, ReportHead
 from persistent_diamonds_v3.training import (
     DistillationTrainer,
     NarratorTextDataset,
@@ -37,6 +37,7 @@ def _build_world_narrator(cfg: PersistentDiamondsConfig):
         module_count=cfg.world_model.module_count,
         overlap_ratio=cfg.world_model.overlap_ratio,
         hidden_dim=cfg.world_model.hidden_dim,
+        action_dim=cfg.world_model.action_dim,
     )
     narrator = DiscreteNarrator(
         latent_dim=cfg.world_model.latent_dim,
@@ -48,6 +49,15 @@ def _build_world_narrator(cfg: PersistentDiamondsConfig):
         code_dim=cfg.narrator.code_dim,
     )
     return world, narrator
+
+
+def _build_control_head(cfg: PersistentDiamondsConfig) -> ControlHead:
+    narrator_dim = cfg.narrator.codes_per_step * cfg.narrator.code_dim
+    return ControlHead(
+        narrator_dim=narrator_dim,
+        action_dim=cfg.control_head.action_dim,
+        hidden_dim=cfg.control_head.hidden_dim,
+    )
 
 
 def _build_report_head(cfg: PersistentDiamondsConfig, *, vocab_size_override: int | None = None) -> ReportHead:

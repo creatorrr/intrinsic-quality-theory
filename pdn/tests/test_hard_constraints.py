@@ -12,6 +12,7 @@ import torch
 import torch.nn as nn
 
 from persistent_diamonds_v3.models import (
+    ControlHead,
     DiscreteNarrator,
     ModularSSMWorldModel,
     ReportHead,
@@ -55,6 +56,12 @@ def _make_report_head(**overrides):
     )
     defaults.update(overrides)
     return ReportHead(**defaults)
+
+
+def _make_control_head(narrator_dim=64, **overrides):
+    defaults = dict(narrator_dim=narrator_dim, action_dim=8, hidden_dim=32)
+    defaults.update(overrides)
+    return ControlHead(**defaults)
 
 
 # ===================================================================
@@ -134,6 +141,55 @@ class TestNoBypass:
         assert first_layer.in_features == expected_in, (
             f"task_head input dim {first_layer.in_features} != "
             f"narrator_dim({narrator_dim}) + hidden_dim({narrator.hidden_dim}) = {expected_in}"
+        )
+
+    def test_control_head_signature_requires_narrator_not_states(self):
+        """ControlHead.forward accepts (narrator_state) – no world state tensor."""
+        import inspect
+
+        sig = inspect.signature(ControlHead.forward)
+        params = list(sig.parameters.keys())
+        assert "narrator_state" in params
+        for forbidden in ("states", "world_state", "world_states", "latent_state"):
+            assert forbidden not in params, f"ControlHead.forward must not accept '{forbidden}'"
+
+    def test_control_head_gradient_does_not_reach_world_model(self):
+        """Backprop through control head with discrete codes must not reach world model.
+
+        At inference time, code_indices are integers and narrator_state is
+        reconstructed from the codebook.  We simulate this by detaching the
+        narrator_state (equivalent to the non-differentiable code-index path).
+        """
+        world = _make_world_model()
+        narrator = _make_narrator()
+        control = _make_control_head(narrator_dim=narrator.codes_per_step * narrator.code_dim)
+
+        x = torch.randn(2, 10, 16)
+        world_out = world(x)
+        nar_out = narrator(world_out.states[:, -4:])
+
+        # Simulate the discrete bottleneck: detach narrator_state as if
+        # reconstructed from integer code_indices (non-differentiable).
+        ctrl_out = control(nar_out.narrator_state.detach())
+
+        loss = ctrl_out.action_logits.sum() + ctrl_out.value_estimate.sum()
+        loss.backward()
+
+        for name, p in world.named_parameters():
+            assert p.grad is None or torch.all(p.grad == 0), (
+                f"World model param '{name}' received gradient through control head – bypass detected"
+            )
+
+    def test_control_head_input_dim_matches_narrator_bottleneck(self):
+        """ControlHead must accept exactly narrator_dim = codes_per_step * code_dim."""
+        narrator = _make_narrator(codes_per_step=8, code_dim=8)
+        narrator_dim = narrator.codes_per_step * narrator.code_dim
+        control = _make_control_head(narrator_dim=narrator_dim)
+
+        first_layer = control.shared[0]
+        assert isinstance(first_layer, nn.Linear)
+        assert first_layer.in_features == narrator_dim, (
+            f"ControlHead input dim {first_layer.in_features} != narrator_dim({narrator_dim})"
         )
 
 

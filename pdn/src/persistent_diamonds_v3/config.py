@@ -17,6 +17,7 @@ class WorldModelConfig:
     module_count: int = 6
     overlap_ratio: float = 0.25
     hidden_dim: int = 2048
+    action_dim: int = 0
 
 
 @dataclass(slots=True)
@@ -28,6 +29,12 @@ class NarratorConfig:
     codebook_size: int = 1024
     codes_per_step: int = 8
     code_dim: int = 64
+
+
+@dataclass(slots=True)
+class ControlHeadConfig:
+    action_dim: int = 16
+    hidden_dim: int = 256
 
 
 @dataclass(slots=True)
@@ -87,6 +94,7 @@ class TrainConfig:
 class PersistentDiamondsConfig:
     world_model: WorldModelConfig = field(default_factory=WorldModelConfig)
     narrator: NarratorConfig = field(default_factory=NarratorConfig)
+    control_head: ControlHeadConfig = field(default_factory=ControlHeadConfig)
     report_head: ReportHeadConfig = field(default_factory=ReportHeadConfig)
     stage2_weights: Stage2LossWeights = field(default_factory=Stage2LossWeights)
     distillation: DistillationConfig = field(default_factory=DistillationConfig)
@@ -99,6 +107,7 @@ class PersistentDiamondsConfig:
         return cls(
             world_model=WorldModelConfig(**raw.get("world_model", {})),
             narrator=NarratorConfig(**raw.get("narrator", {})),
+            control_head=ControlHeadConfig(**raw.get("control_head", {})),
             report_head=ReportHeadConfig(**raw.get("report_head", {})),
             stage2_weights=Stage2LossWeights(**raw.get("stage2_weights", {})),
             distillation=DistillationConfig(**raw.get("distillation", {})),

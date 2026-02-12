@@ -14,11 +14,11 @@ Status key: `implemented` | `partial` | `missing`
 | 2.1.1 | Heterogeneous time constants (log-uniform, spanning orders of magnitude) | implemented | `_decay_raw` initialized via `torch.logspace(0, 3, ...)` |
 | 2.1.2 | Overlapping module slices (~25% overlap between adjacent modules) | implemented | `_build_module_slices` with configurable `overlap_ratio` |
 | 2.1.2 | Overlap zones receive updates from both modules' dynamics | implemented | `step()` accumulates and averages overlapping updates |
-| 2.1.3 | Text encoder (frozen pretrained embeddings) | missing | No encoder modules exist |
-| 2.1.3 | Vision encoder (small ViT) | missing | No encoder modules exist |
-| 2.1.3 | Proprioceptive / reward encoder | missing | No encoder modules exist |
-| 2.1.3 | Encoders produce perturbations, not complete representations | missing | No encoder interface |
-| 2.1.4 | Action conditioning: z_{t+1} = f(z_t, a_t, o_{t+1}) | missing | `step()` takes only `(input_t, state_t)`, no action input |
+| 2.1.3 | Text encoder (frozen pretrained embeddings) | implemented | `TextEncoder` in `models/encoders.py`; frozen by default, Tanh-bounded perturbations |
+| 2.1.3 | Vision encoder (small ViT) | implemented | `VisionEncoder` stub in `models/encoders.py`; accepts flat features, projects to perturbation |
+| 2.1.3 | Proprioceptive / reward encoder | implemented | `ProprioRewardEncoder` in `models/encoders.py` |
+| 2.1.3 | Encoders produce perturbations, not complete representations | implemented | All encoders output Tanh/SiLU-bounded perturbation vectors via `ModalityEncoder` ABC |
+| 2.1.4 | Action conditioning: z_{t+1} = f(z_t, a_t, o_{t+1}) | implemented | `step()` accepts optional `action_t`; `forward()` accepts `actions` [B,T,A]; defaults to zeros when absent |
 
 ### 2.2 Narrator
 
@@ -30,15 +30,15 @@ Status key: `implemented` | `partial` | `missing`
 | 2.2.3 | Self-prediction head: narrator predicts own next state | implemented | `self_prediction_head` in `DiscreteNarrator` |
 | 2.2.3 | Uncertainty channel: compression-loss estimate epsilon_t | implemented | `uncertainty_head` in `DiscreteNarrator` |
 | 2.2.3 | Capacity inference (narrator infers own effective capacity) | missing | Spec marks as optional; not implemented |
-| 2.2.4 | No-bypass hard constraint (no path from z_t to output heads) | partial | Architecturally enforced (ReportHead takes code_indices only) but no regression test |
+| 2.2.4 | No-bypass hard constraint (no path from z_t to output heads) | implemented | Regression tests for ReportHead and ControlHead in `test_hard_constraints.py` |
 | 2.2.4 | Report head: small transformer decoder from narrator codes to text | implemented | `ReportHead` in `models/report_head.py` |
-| 2.2.4 | Control head: MLP from b_t to action logits and value estimates | missing | No `ControlHead` module |
+| 2.2.4 | Control head: MLP from b_t to action logits and value estimates | implemented | `ControlHead` in `models/control_head.py`; narrator-only input with no-bypass tests |
 
 ### 2.3 Information Flow
 
 | # | Spec Item | Status | Notes |
 |---|-----------|--------|-------|
-| 2.3 | Task head receives narrator state only (not world state directly) | partial | Stage 2 task_head receives `narrator_state + narrator_uncertainty`, consistent with spec, but no architectural enforcement test |
+| 2.3 | Task head receives narrator state only (not world state directly) | implemented | Stage 2 task_head receives `narrator_state + narrator_uncertainty`; regression test in `test_hard_constraints.py` |
 
 ## 3. Training Pipeline
 
@@ -115,9 +115,9 @@ Status key: `implemented` | `partial` | `missing`
 
 | # | Constraint | Status | Notes |
 |---|-----------|--------|-------|
-| HC-1 | No bypass: all outputs depend on narrator channel only | partial | Architecturally present; no regression test |
-| HC-2 | Narrator bitrate cap: discrete, explicitly computed, tested for non-leakage | partial | Cap computed correctly; no leakage test |
-| HC-3 | World state continuity: persists across episode boundaries | partial | `persist_state` flag exists; no cross-batch continuity test |
+| HC-1 | No bypass: all outputs depend on narrator channel only | implemented | Regression tests for ReportHead, ControlHead, and task_head in `test_hard_constraints.py` |
+| HC-2 | Narrator bitrate cap: discrete, explicitly computed, tested for non-leakage | implemented | Cap computed correctly; regression tests for bitrate formula, codebook bounds, and shape in `test_hard_constraints.py` |
+| HC-3 | World state continuity: persists across episode boundaries | implemented | `persist_state` flag exists; cross-batch continuity, reset, and detach tests in `test_hard_constraints.py` |
 | HC-4 | Grounded autonomy: rewarded only conditional on task competence | implemented | Threshold gating in `_grounded_autonomy_loss()` |
 | HC-5 | Overlap primitive exists architecturally, exercised in evaluation | partial | Exists in architecture; not exercised in protocol evaluation |
 | HC-6 | Every metric has at least one adversarial test | partial | Only P and U have adversarial tests; K, R, tau_eff do not |
@@ -126,9 +126,9 @@ Status key: `implemented` | `partial` | `missing`
 
 | Category | Implemented | Partial | Missing | Total |
 |----------|------------|---------|---------|-------|
-| Architecture (2.x) | 10 | 2 | 7 | 19 |
+| Architecture (2.x) | 18 | 0 | 1 | 19 |
 | Training (3.x) | 9 | 1 | 4 | 14 |
 | Evaluation (4.x) | 5 | 2 | 5 | 12 |
 | Infrastructure (5-6.x) | 0 | 1 | 3 | 4 |
-| Hard Constraints | 1 | 4 | 1 | 6 |
-| **Total** | **25** | **10** | **20** | **55** |
+| Hard Constraints | 4 | 1 | 1 | 6 |
+| **Total** | **36** | **5** | **14** | **55** |

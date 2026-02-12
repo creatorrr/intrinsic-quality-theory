@@ -16,16 +16,24 @@ class WorldModelOutput:
 class ModuleDynamics(nn.Module):
     """Single module dynamics for an overlapping state slice."""
 
-    def __init__(self, input_dim: int, state_dim: int, hidden_dim: int):
+    def __init__(self, input_dim: int, state_dim: int, hidden_dim: int, *, action_dim: int = 0):
         super().__init__()
         self.net = nn.Sequential(
-            nn.Linear(input_dim + state_dim, hidden_dim),
+            nn.Linear(input_dim + state_dim + action_dim, hidden_dim),
             nn.SiLU(),
             nn.Linear(hidden_dim, state_dim),
         )
 
-    def forward(self, input_t: torch.Tensor, state_t: torch.Tensor) -> torch.Tensor:
-        return self.net(torch.cat([input_t, state_t], dim=-1))
+    def forward(
+        self,
+        input_t: torch.Tensor,
+        state_t: torch.Tensor,
+        action_t: torch.Tensor | None = None,
+    ) -> torch.Tensor:
+        parts = [input_t, state_t]
+        if action_t is not None:
+            parts.append(action_t)
+        return self.net(torch.cat(parts, dim=-1))
 
 
 class ModularSSMWorldModel(nn.Module):
@@ -38,11 +46,13 @@ class ModularSSMWorldModel(nn.Module):
         module_count: int,
         overlap_ratio: float,
         hidden_dim: int,
+        action_dim: int = 0,
     ):
         super().__init__()
         self.input_dim = input_dim
         self.latent_dim = latent_dim
         self.module_count = module_count
+        self.action_dim = action_dim
 
         self.module_slices = self._build_module_slices(latent_dim, module_count, overlap_ratio)
         self.modules_dyn = nn.ModuleList(
@@ -51,6 +61,7 @@ class ModularSSMWorldModel(nn.Module):
                     input_dim=input_dim,
                     state_dim=end - start,
                     hidden_dim=hidden_dim,
+                    action_dim=action_dim,
                 )
                 for (start, end) in self.module_slices
             ]
@@ -100,9 +111,19 @@ class ModularSSMWorldModel(nn.Module):
         self,
         input_t: torch.Tensor,
         state_t: torch.Tensor,
+        action_t: torch.Tensor | None = None,
     ) -> torch.Tensor:
         if input_t.ndim != 2 or state_t.ndim != 2:
             raise ValueError("Expected `input_t` and `state_t` as [B, D] tensors.")
+        if action_t is not None and action_t.ndim != 2:
+            raise ValueError("Expected `action_t` as [B, A] tensor.")
+
+        # When action_dim > 0 but no action is provided, default to zeros.
+        if action_t is None and self.action_dim > 0:
+            action_t = torch.zeros(
+                input_t.size(0), self.action_dim,
+                device=input_t.device, dtype=input_t.dtype,
+            )
 
         batch = input_t.size(0)
         updates = torch.zeros(batch, self.latent_dim, device=input_t.device, dtype=input_t.dtype)
@@ -110,7 +131,7 @@ class ModularSSMWorldModel(nn.Module):
 
         for (start, end), module in zip(self.module_slices, self.modules_dyn, strict=True):
             local_state = state_t[:, start:end]
-            local_update = module(input_t, local_state)
+            local_update = module(input_t, local_state, action_t)
             updates[:, start:end] += local_update
             counts[start:end] += 1.0
 
@@ -125,6 +146,7 @@ class ModularSSMWorldModel(nn.Module):
         self,
         inputs: torch.Tensor,
         *,
+        actions: torch.Tensor | None = None,
         initial_state: torch.Tensor | None = None,
         persist_state: bool = False,
     ) -> WorldModelOutput:
@@ -132,6 +154,11 @@ class ModularSSMWorldModel(nn.Module):
             raise ValueError("Expected `inputs` as [B, T, D].")
         if inputs.size(-1) != self.input_dim:
             raise ValueError(f"Expected input dim {self.input_dim}, got {inputs.size(-1)}")
+        if actions is not None:
+            if actions.ndim != 3:
+                raise ValueError("Expected `actions` as [B, T, A].")
+            if actions.size(1) != inputs.size(1):
+                raise ValueError("Actions and inputs must have the same number of timesteps.")
 
         batch, steps, _ = inputs.shape
         if initial_state is None:
@@ -143,7 +170,8 @@ class ModularSSMWorldModel(nn.Module):
 
         state_seq: list[torch.Tensor] = []
         for t in range(steps):
-            state_t = self.step(inputs[:, t], state_t)
+            action_t = actions[:, t] if actions is not None else None
+            state_t = self.step(inputs[:, t], state_t, action_t)
             state_seq.append(state_t)
 
         final_state = state_t
