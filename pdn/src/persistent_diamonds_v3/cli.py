@@ -9,6 +9,12 @@ import typer
 from persistent_diamonds_v3.config import PersistentDiamondsConfig
 from persistent_diamonds_v3.data import IQTObjectiveDataStore, ObjectiveRequest, ObjectiveTensorDataset
 from persistent_diamonds_v3.evaluation import compute_iqt_bundle
+from persistent_diamonds_v3.evaluation.protocols import (
+    result_to_dict,
+    run_protocol1,
+    run_protocol2,
+    run_protocol3,
+)
 from persistent_diamonds_v3.models import ControlHead, DiscreteNarrator, ModularSSMWorldModel, ReportHead
 from persistent_diamonds_v3.training import (
     DistillationTrainer,
@@ -327,6 +333,7 @@ def evaluate(
     payload = {
         "tau_eff": bundle.tau_eff,
         "unity": bundle.unity,
+        "readout_dominance": bundle.readout_dominance,
         "coherence": bundle.coherence,
         "persistence": [
             {
@@ -339,6 +346,119 @@ def evaluate(
         ],
     }
     typer.echo(json.dumps(payload, indent=2))
+
+
+def _prepare_eval_obs(cfg: PersistentDiamondsConfig, objective: str = "mixed") -> torch.Tensor:
+    """Prepare a small observation batch for protocol evaluation."""
+    store = IQTObjectiveDataStore(cfg.data.cache_dir)
+    data = store.materialize(
+        ObjectiveRequest(
+            objective=objective,  # type: ignore[arg-type]
+            num_sequences=128,
+            sequence_length=min(cfg.data.default_sequence_length, 128),
+            feature_dim=cfg.data.feature_dim,
+        )
+    )
+    dataset = ObjectiveTensorDataset(data.dataset_path)
+    batch_count = min(32, len(dataset))
+    return torch.stack([dataset[i]["observations"] for i in range(batch_count)], dim=0)
+
+
+@app.command("protocol1")
+def protocol1(
+    config_path: Path = Path("pdv3.yaml"),
+    objective: str = "mixed",
+    world_checkpoint: Path | None = None,
+    narrator_checkpoint: Path | None = None,
+    output_path: Path = Path("artifacts/protocol1.json"),
+):
+    """Run Protocol 1 analogue: titrated degradation of recurrent gain."""
+    cfg = _load_config(config_path)
+    obs = _prepare_eval_obs(cfg, objective)
+
+    world, narrator = _build_world_narrator(cfg)
+    if world_checkpoint and world_checkpoint.exists():
+        world.load_state_dict(_load_weights(world_checkpoint))
+    if narrator_checkpoint and narrator_checkpoint.exists():
+        narrator.load_state_dict(_load_weights(narrator_checkpoint))
+
+    with torch.no_grad():
+        result = run_protocol1(
+            world, narrator, obs,
+            world_step_hz=cfg.narrator.world_step_hz,
+        )
+
+    payload = result_to_dict(result)
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    output_path.write_text(json.dumps(payload, indent=2))
+    typer.echo(f"Protocol 1 complete. Fragmentation detected: {result.fragmentation_detected}")
+    typer.echo(f"Artifact: {output_path}")
+
+
+@app.command("protocol2")
+def protocol2(
+    config_path: Path = Path("pdv3.yaml"),
+    objective: str = "mixed",
+    world_checkpoint: Path | None = None,
+    narrator_checkpoint: Path | None = None,
+    output_path: Path = Path("artifacts/protocol2.json"),
+):
+    """Run Protocol 2 analogue: overlap test with perturbation propagation."""
+    cfg = _load_config(config_path)
+    obs = _prepare_eval_obs(cfg, objective)
+
+    world, narrator = _build_world_narrator(cfg)
+    if world_checkpoint and world_checkpoint.exists():
+        world.load_state_dict(_load_weights(world_checkpoint))
+    if narrator_checkpoint and narrator_checkpoint.exists():
+        narrator.load_state_dict(_load_weights(narrator_checkpoint))
+
+    with torch.no_grad():
+        result = run_protocol2(
+            world, narrator, obs,
+            world_step_hz=cfg.narrator.world_step_hz,
+        )
+
+    payload = result_to_dict(result)
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    output_path.write_text(json.dumps(payload, indent=2))
+    typer.echo(f"Protocol 2 complete. Dual high persistence: {result.dual_high_persistence}")
+    typer.echo(f"O-information: {result.tripartite_o_information:.4f}")
+    typer.echo(f"Perturbation containment: {result.perturbation_containment:.4f}")
+    typer.echo(f"Artifact: {output_path}")
+
+
+@app.command("protocol3")
+def protocol3(
+    config_path: Path = Path("pdv3.yaml"),
+    objective: str = "mixed",
+    world_checkpoint: Path | None = None,
+    narrator_checkpoint: Path | None = None,
+    output_path: Path = Path("artifacts/protocol3.json"),
+):
+    """Run Protocol 3 analogue: timescale manipulation and peak-shift analysis."""
+    cfg = _load_config(config_path)
+    obs = _prepare_eval_obs(cfg, objective)
+
+    world, narrator = _build_world_narrator(cfg)
+    if world_checkpoint and world_checkpoint.exists():
+        world.load_state_dict(_load_weights(world_checkpoint))
+    if narrator_checkpoint and narrator_checkpoint.exists():
+        narrator.load_state_dict(_load_weights(narrator_checkpoint))
+
+    with torch.no_grad():
+        result = run_protocol3(
+            world, narrator, obs,
+            world_step_hz=cfg.narrator.world_step_hz,
+        )
+
+    payload = result_to_dict(result)
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    output_path.write_text(json.dumps(payload, indent=2))
+    typer.echo(f"Protocol 3 complete. Peak-shift detected: {result.peak_shift_detected}")
+    for c in result.conditions:
+        typer.echo(f"  {c.condition}: peak_lag={c.peak_lag} auc={c.auc_persistence:.4f}")
+    typer.echo(f"Artifact: {output_path}")
 
 
 if __name__ == "__main__":
