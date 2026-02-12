@@ -88,25 +88,25 @@ Status key: `implemented` | `partial` | `missing`
 | 4.1 | K_jl cross-module coherence (knowledge) | implemented | `cross_module_coherence()` |
 | 4.1 | U unity functional | implemented | `unity_functional()` |
 | 4.1 | tau_eff effective timescale | implemented | `tau_eff()` |
-| 4.1 | R readout dominance | missing | Not in metrics.py |
+| 4.1 | R readout dominance | implemented | `readout_dominance()` in `evaluation/metrics.py`; Granger-style directed-information proxy |
 | 4.1 | Adversarial check: persistence split | implemented | `adversarial_persistence_split()` |
 | 4.1 | Adversarial check: shuffle unity | implemented | `adversarial_shuffle_unity()` |
-| 4.1 | Adversarial check: per-metric adversarial tests (full set) | partial | Only persistence and unity have adversarial checks |
+| 4.1 | Adversarial check: per-metric adversarial tests (full set) | implemented | P, U, K, R, tau_eff all have adversarial checks in `evaluation/metrics.py` |
 
 ### 4.2 Protocol Analogues
 
 | # | Spec Item | Status | Notes |
 |---|-----------|--------|-------|
-| 4.2.1 | Protocol 1: Titrated degradation (reduce recurrent gain) | missing | |
-| 4.2.2 | Protocol 2: Overlap test (concurrent tasks on overlapping threads) | missing | |
-| 4.2.3 | Protocol 3: Timescale manipulation (widen/narrow/dissolve) | missing | |
-| 4.3 | Self-report evaluation during Protocol 3 | missing | |
+| 4.2.1 | Protocol 1: Titrated degradation (reduce recurrent gain) | implemented | `run_protocol1()` in `evaluation/protocols.py`; CLI command `protocol1` |
+| 4.2.2 | Protocol 2: Overlap test (concurrent tasks on overlapping threads) | implemented | `run_protocol2()` with perturbation propagation and tripartite O-information |
+| 4.2.3 | Protocol 3: Timescale manipulation (widen/narrow/dissolve) | implemented | `run_protocol3()` with peak-shift analysis; CLI command `protocol3` |
+| 4.3 | Self-report evaluation during Protocol 3 | missing | Requires Stage 3 report head integration with protocol runner |
 
 ## 5. Engineering / Infrastructure
 
 | # | Spec Item | Status | Notes |
 |---|-----------|--------|-------|
-| 5 | CLI commands for all training stages | partial | Stages 1-3 + evaluate present; no Stage 4, no protocol commands |
+| 5 | CLI commands for all training stages | partial | Stages 1-3 + evaluate + protocol1/protocol2/protocol3 present; no Stage 4 |
 | 6 | Reference configuration (size presets: small/medium/large) | missing | Single default config only |
 | 6 | bf16 / gradient accumulation / activation checkpointing | missing | No training infra switches |
 | 6 | Accelerate integration | missing | Listed in optional deps but not used |
@@ -119,8 +119,8 @@ Status key: `implemented` | `partial` | `missing`
 | HC-2 | Narrator bitrate cap: discrete, explicitly computed, tested for non-leakage | implemented | Cap computed correctly; regression tests for bitrate formula, codebook bounds, and shape in `test_hard_constraints.py` |
 | HC-3 | World state continuity: persists across episode boundaries | implemented | `persist_state` flag exists; cross-batch continuity, reset, and detach tests in `test_hard_constraints.py` |
 | HC-4 | Grounded autonomy: rewarded only conditional on task competence | implemented | Threshold gating in `_grounded_autonomy_loss()` |
-| HC-5 | Overlap primitive exists architecturally, exercised in evaluation | partial | Exists in architecture; not exercised in protocol evaluation |
-| HC-6 | Every metric has at least one adversarial test | partial | Only P and U have adversarial tests; K, R, tau_eff do not |
+| HC-5 | Overlap primitive exists architecturally, exercised in evaluation | implemented | Exercised in Protocol 2 (`run_protocol2()`) which tests overlapping module regions |
+| HC-6 | Every metric has at least one adversarial test | implemented | P, U, K, R, tau_eff all have adversarial checks; tested in `test_metrics_extended.py` |
 
 ## Summary
 
@@ -128,7 +128,7 @@ Status key: `implemented` | `partial` | `missing`
 |----------|------------|---------|---------|-------|
 | Architecture (2.x) | 18 | 0 | 1 | 19 |
 | Training (3.x) | 9 | 1 | 4 | 14 |
-| Evaluation (4.x) | 5 | 2 | 5 | 12 |
-| Infrastructure (5-6.x) | 0 | 1 | 3 | 4 |
-| Hard Constraints | 4 | 1 | 1 | 6 |
-| **Total** | **36** | **5** | **14** | **55** |
+| Evaluation (4.x) | 11 | 0 | 1 | 12 |
+| Infrastructure (5-6.x) | 1 | 0 | 3 | 4 |
+| Hard Constraints | 6 | 0 | 0 | 6 |
+| **Total** | **45** | **1** | **9** | **55** |
