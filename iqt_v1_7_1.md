@@ -4,7 +4,7 @@
 Diwank Singh Tomer
 
 
-#### Draft v1.6 – February 2026
+#### Draft v1.7.1 – February 2026
 
 
 # Abstract
@@ -252,32 +252,168 @@ This is not a claim of correlation or supervenience. It is the stronger claim th
 
 ## 1.1 The Constraint Argument
 
-The identity thesis is not a definitional stipulation. It follows from a constraint analysis on the net of local algebras introduced in §0.
+IQT's central identity claim — that phenomenal quality *is* the algebra–state pair $(\mathcal{A}(D), \omega_D)$ — is not stipulated. It is arrived at by elimination. We impose four constraints on any candidate "intrinsic nature" of a bounded spacetime region, show that these constraints force the candidate into a unique mathematical form, and then identify that form with phenomenal quality as a separate postulate.
 
-**Assumptions.** Let $D \mapsto \mathcal{A}(D)$ be a net of $C^*$-algebras on a directed set of bounded spacetime regions (e.g., double cones in Minkowski space), satisfying isotony, microcausality, and the existence of a global state $\omega$ whose GNS representation is faithful on each local algebra. Let $\omega_D := \omega|_{\mathcal{A}(D)}$ denote the restriction of $\omega$ to $\mathcal{A}(D)$.
+### Overview of the Strategy
 
-**Definition.** An *intrinsic-nature assignment* on the net is a rule $I$ that assigns to each region $D$ a mathematical object $I(D)$, subject to:
+The argument has two logically distinct parts:
 
-1. **Completeness.** $I(D)$ determines $\omega_D(A)$ for every $A \in \mathcal{A}(D)$. (The intrinsic nature fixes every measurement outcome internal to the region.)
-2. **Isotony.** If $D_1 \subseteq D_2$, then $I(D_1)$ is recoverable from $I(D_2)$ by a canonical restriction operation. (The nature of a subregion is derivable from the nature of any containing region.)
-3. **Covariance.** If $\alpha_g$ is a symmetry of the net mapping $D$ to $D'$, then $I(D') = \alpha_g \cdot I(D)$ under the induced action. (Intrinsic nature transforms appropriately under physical symmetries.)
-4. **Perspectival completeness.** $I(D)$ depends only on $\mathcal{A}(D)$ and $\omega_D$, not on observables localized outside $D$. (The intrinsic nature is self-contained.)
+1. A **convergence theorem** (mathematical): any admissible intrinsic-nature assignment reduces to the local state on the local algebra, modulo a precisely statable no-redundancy condition.
+1. A **quality identity postulate** (metaphysical): the converged mathematical object is phenomenal quality.
 
-**Proposition (Constraint Convergence).** Any intrinsic-nature assignment $I$ satisfying Constraints 1–4 on a net $D \mapsto \mathcal{A}(D)$ under the above assumptions is naturally equivalent to the assignment $D \mapsto (\mathcal{A}(D),\, \omega_D)$.
+Only (1) is provable. The support for (2) is abductive — explanatory coherence, parsimony, and the empirical bridge hypotheses developed in §§2–4. We treat (1) and (2) in turn.
 
-*Proof sketch.* By Constraint 1, $I(D)$ determines all expectation values $\omega_D(A)$, so $I(D)$ determines $\omega_D$ as a linear functional on $\mathcal{A}(D)$. By Constraint 4, $I(D)$ depends on no information beyond $\mathcal{A}(D)$ and $\omega_D$. Therefore $I(D)$ is a function of the pair $(\mathcal{A}(D), \omega_D)$ alone. By Constraint 2, this function must be compatible with the restriction maps $\mathcal{A}(D_2) \to \mathcal{A}(D_1)$ for $D_1 \subseteq D_2$; since restriction of $\omega$ to a subalgebra is the unique operation that both preserves expectation values and respects the inclusion, $I$ must act as restriction on the state component. By Constraint 3, $I$ must be equivariant under net automorphisms; since symmetries act jointly on the algebra and the state, $I$ is determined up to the natural equivalence $(\mathcal{A}(D), \omega_D) \sim (\mathcal{A}(D'), \omega_{D'})$ when related by a symmetry. $\square$
+-----
 
-**Remark (interpretive postulate).** The proposition establishes a conditional: if a physical region has an intrinsic nature in the sense of Constraints 1–4, then it is (equivalent to) the local algebra-state pair. The proposition does *not* establish that intrinsic nature has anything to do with phenomenal quality. That identification is IQT's core postulate:
+### Setup
 
-> **Quality Identity (QI).** The intrinsic nature of a bounded spacetime region — the local algebra-state pair $(\mathcal{A}(D), \omega_D)$ identified by the Constraint Convergence proposition — is phenomenal quality.
+Let $(\mathsf{Reg}, \leq)$ be a directed poset of bounded spacetime regions (double cones in Minkowski space, or causal diamonds in a causal set), where $D_1 \leq D_2$ means $D_1 \subseteq D_2$.
 
-QI is not derivable from the constraints. It is a metaphysical postulate, one additional step beyond the constraint argument. Its justification is abductive: QI is the simplest postulate that, conjoined with the constraint convergence, generates composition (§3), subject selection (§4.4), temporal phenomenology (§2.6), and three pre-registerable experiments (§5). Without QI, the constraint argument delivers a characterization of "intrinsic nature" with no connection to the mind. With QI, the same characterization becomes a testable theory of consciousness.
+Let $\mathcal{A} : \mathsf{Reg} \to \mathsf{C^*Alg}$ be a net of unital C*-algebras — a covariant functor assigning to each region $D$ an algebra $\mathcal{A}(D)$ of observables, with isotony embeddings $\iota_{12} : \mathcal{A}(D_1) \hookrightarrow \mathcal{A}(D_2)$ whenever $D_1 \leq D_2$, satisfying the functoriality conditions $\iota_{23} \circ \iota_{12} = \iota_{13}$ and $\iota_{DD} = \mathrm{id}$. This is the standard Haag–Kastler framework (§0).
 
-**Constraint dialectic: rival proposals.** Two alternative constraint sets merit rebuttal.
+Let $\omega$ be a compatible family of local states ${\omega_D}*{D \in \mathsf{Reg}}$, where each $\omega_D : \mathcal{A}(D) \to \mathbb{C}$ is a state (positive normalized linear functional), and the family is compatible with restriction: $\omega*{D_1} = \omega_{D_2} \circ \iota_{12}$ whenever $D_1 \leq D_2$. (Equivalently, $\omega$ is a state on the quasilocal algebra $\mathcal{A} = \overline{\bigcup_D \mathcal{A}(D)}$, and $\omega_D$ is its restriction to $\mathcal{A}(D)$.)
 
-*The causal-powers alternative (IIT).* IIT identifies consciousness with cause-effect structure — the set of causal constraints a mechanism in a state exerts over its past and future (Oizumi, Albantakis, & Tononi, 2014; Albantakis et al., 2023). This replaces Constraint 1 with completeness over counterfactual interventions. We reject this on parsimony: cause-effect structure is derivable from $(\mathcal{A}(D), \omega_D)$ together with a specified dynamical evolution. If the state fixes all observables and the dynamics is specified, causal-influence measures are consequences, not additional ontological facts.
+The restriction structure defines a contravariant functor — the **state presheaf**:
+$$
+\Omega : \mathsf{Reg}^{\mathrm{op}} \to \mathsf{Set}, \qquad \Omega(D) := \mathrm{State}(\mathcal{A}(D)),
+$$
+where restriction maps act by precomposition: $\rho \mapsto \rho \circ \iota_{12}$.
 
-*The modal/counterfactual objection.* One might argue that intrinsic nature must include the laws governing evolution, not just the actual state. We partially concede: the algebra $\mathcal{A}(D)$ does encode the space of possibilities for $D$. What IQT denies is that the *global* dynamical laws or global state are part of $D$'s intrinsic nature. The local algebra and local state jointly constitute the intrinsic nature; everything beyond that is extrinsic-to-$D$.
+The **quality object** at $D$ is the pair $Q(D) := (\mathcal{A}(D), \omega_D)$. When the net is fixed as background structure (as it typically is — the net encodes the laws, the state encodes the actual world), the varying data is the local state $\omega_D$, and $Q(D)$ is determined by the section $D \mapsto \omega_D$ of the state presheaf.
+
+-----
+
+### Intrinsic-Nature Assignments
+
+We now ask: what mathematical form must the "intrinsic nature" of a region $D$ take, if it is to satisfy certain minimal constraints? To make this precise without begging any questions, we define:
+
+**Definition (Intrinsic-nature assignment).** An *intrinsic-nature assignment* on the net is a pair $(I, \delta)$ where:
+
+1. $I : \mathsf{Reg}^{\mathrm{op}} \to \mathsf{Set}$ is a presheaf (the "descriptor presheaf"), and
+1. $\delta : I \Rightarrow \Omega$ is a natural transformation (the "decoding map").
+
+Elements of $I(D)$ are candidate descriptors for the intrinsic nature of region $D$. The map $\delta_D : I(D) \to \Omega(D)$ sends each descriptor to the local state it operationally implies — the expectation-value assignment for all observables in $\mathcal{A}(D)$ that the descriptor determines. Naturality of $\delta$ says that decoding commutes with restriction: the state implied by a descriptor of the larger region, restricted to the subalgebra of a smaller region, equals the state implied by the restricted descriptor.
+
+Given the actual world, we additionally have a **section** $i$ of $I$: an assignment $i_D \in I(D)$ for each $D$, compatible with restriction ($I(\iota_{12})(i_{D_2}) = i_{D_1}$), representing what the intrinsic nature of each region *actually is*. The actual operational content is then $\delta_D(i_D)$; the theory stipulates $\delta_D(i_D) = \omega_D$.
+
+This packaging is deliberately neutral. It says nothing about consciousness, nothing about the internal constitution of the descriptors, nothing about whether $I$ coincides with $\Omega$ or carries extra structure. The constraints now do the work of eliminating alternatives.
+
+-----
+
+### The Four Constraints
+
+We impose four conditions on any admissible $(I, \delta)$. Each is motivated by a physical or methodological principle, and each eliminates a class of candidate assignments.
+
+#### Constraint 1 — Operational Completeness
+
+*The intrinsic nature of $D$ determines all measurement statistics internal to $D$.*
+
+Formally: for each $D$, the decoding map $\delta_D(x)$ is a state on $\mathcal{A}(D)$ — it assigns an expectation value to every observable. This is automatic from the definition (since $\Omega(D) = \mathrm{State}(\mathcal{A}(D))$), but the content is in the *existence* of $\delta$: there is no descriptor so sparse that it fails to determine some measurement outcome.
+
+**What C1 eliminates:** any candidate that underdetermines operational statistics — e.g., a classical-variable assignment that fixes a proper subset of expectation values.
+
+#### Constraint 2 — Isotony (Restriction Compatibility)
+
+*The intrinsic nature of a subregion $D_1 \subseteq D_2$ is recoverable from the intrinsic nature of $D_2$ by restriction.*
+
+Formally: $I$ is a presheaf with restriction maps $I(\iota_{12}) : I(D_2) \to I(D_1)$, and $\delta$ is natural:
+$$
+\delta_{D_1}(I(\iota_{12})(x)) = \delta_{D_2}(x) \circ \iota_{12} \qquad \text{for all } x \in I(D_2).
+$$
+
+**What C2 eliminates:** any candidate where the intrinsic nature of a subregion is assigned independently of the containing region — where "zooming in" could yield a descriptor inconsistent with the one you started from. Physically, this encodes the net structure: the observables of $D_1$ are a subalgebra of those of $D_2$, and the intrinsic nature must respect this.
+
+#### Constraint 3 — Covariance
+
+*The intrinsic-nature assignment transforms correctly under spacetime symmetries.*
+
+Let $G$ be a symmetry group acting on $\mathsf{Reg}$ (Poincaré transformations, or the automorphism group of the causal set), and suppose the net is $G$-covariant: for each $g \in G$ there are *-isomorphisms $\alpha_{g,D} : \mathcal{A}(D) \xrightarrow{\sim} \mathcal{A}(gD)$, natural in $D$ and compatible with the group law.
+
+Formally: $I$ carries a compatible $G$-action (it is a $G$-equivariant presheaf), and $\delta$ is $G$-equivariant:
+$$
+\delta_{gD}(g \cdot x) = \delta_D(x) \circ \alpha_{g,D}^{-1}.
+$$
+
+**What C3 eliminates:** any candidate that smuggles in a preferred frame or coordinate-dependent information. The intrinsic nature of a region should not change under a symmetry that merely relabels points. Note, however, that C3 does not participate in the convergence theorem below — it constrains which assignments are *physically admissible* but does not narrow the mathematical form of the descriptors. We include it here for completeness and because it plays a role in the discussion of specific models (§2).
+
+#### Constraint 4 — Perspectival Completeness (No Redundancy)
+
+*The intrinsic nature of $D$ contains no more information than what is needed to determine all internal measurement statistics.*
+
+This is the constraint that does the most work, and the one that requires the most care to formalize. The informal content is: $I(D)$ should not carry "junk" — data invisible to any observable in $\mathcal{A}(D)$, data that distinguishes two descriptors even though they imply identical expectation values for every measurement.
+
+There are two clean formalizations, corresponding to two strengths of conclusion:
+
+**C4w (Weak / Locality).** $I$ is a presheaf evaluated on the poset of regions, and the decoding $\delta$ is the only bridge to operational content. This is already encoded by the definition of $(I, \delta)$. It does *not* prevent $\delta_D$ from being non-injective — multiple descriptors can decode to the same state.
+
+**C4s (Strong / No-Junk Extensionality).** The decoding map is componentwise injective:
+$$
+\forall D, \ \forall x, y \in I(D): \quad \delta_D(x) = \delta_D(y) \ \Rightarrow \ x = y.
+$$
+
+C4s says: two descriptors that imply the same measurement statistics for every observable in $\mathcal{A}(D)$ are *the same descriptor*. Intrinsic nature contains exactly the information that shows up in operational tests, and nothing else.
+
+**Why C4s is the natural formalization of "no extra structure."** The weak version C4w allows pathological cases: take any admissible $(I, \delta)$ and form $I'(D) := I(D) \times {0, 1}$ with $\delta'_D(x, b) := \delta_D(x)$. This satisfies C1–C3 and C4w while carrying an operationally invisible bit at every region. C4s blocks exactly this class of counterexamples. The philosophical justification is parsimony: if the extra bit makes no difference to any internal observable, positing it violates Occam's razor applied to the ontology of bounded regions.
+
+One could object that C4s *builds the conclusion into the assumptions* — that requiring injectivity of $\delta$ already forces $I$ to be "essentially" $\Omega$. This is partly true, and the right response is transparency: the convergence theorem below makes the logical dependence precise. The interest of the argument is not that the convergence is a surprising mathematical feat; it is that C4s is a *reasonable condition to impose* on intrinsic-nature candidates, for which there is an independent motivation (parsimony, resistance to ontological bloat). The theorem then shows what follows.
+
+-----
+
+### Constraint Convergence
+
+We state two results, corresponding to the two strengths of C4.
+
+**Proposition 1 (Convergence — Weak Form).** Let $(I, \delta)$ satisfy C1, C2, and C4w. Define an operational equivalence relation on each $I(D)$:
+$$
+x \sim_D y \quad :\Longleftrightarrow \quad \delta_D(x) = \delta_D(y).
+$$
+Let $\widehat{I}(D) := I(D) / {\sim_D}$, and let $\widehat{\delta}_D : \widehat{I}(D) \to \Omega(D)$ be the induced map. Then:
+
+(i) $\widehat{I}$ is a presheaf $\mathsf{Reg}^{\mathrm{op}} \to \mathsf{Set}$ (restriction maps descend to the quotient), and
+
+(ii) $\widehat{\delta} : \widehat{I} \Rightarrow \Omega$ is a natural monomorphism (componentwise injective).
+
+*Proof.* Naturality of $\delta$ implies that the restriction map $I(\iota_{12})$ sends $\sim_{D_2}$-equivalent elements to $\sim_{D_1}$-equivalent elements, so the quotient is functorial. The induced map $\widehat{\delta}_D$ is injective by construction. $\square$
+
+**Interpretation.** Without a no-redundancy assumption, the best provable statement is: modulo whatever surplus structure it carries, every admissible intrinsic-nature assignment collapses to (a subset of) the state presheaf. Any two assignments that agree on all operational content are identified in the quotient.
+
+**Proposition 2 (Convergence — Strong Form).** Let $(I, \delta)$ satisfy C1, C2, and C4s. Then $\delta : I \Rightarrow \Omega$ is a natural monomorphism. If additionally $\delta$ is componentwise surjective — every local state is realizable by some descriptor — then $\delta$ is a natural isomorphism:
+$$
+I \cong \Omega.
+$$
+In particular, $I$ is naturally isomorphic to the state presheaf, and the intrinsic-nature assignment at each region is (up to this isomorphism) the local state on the local algebra.
+
+*Proof.* C4s gives componentwise injectivity; assumed surjectivity gives componentwise bijectivity. Naturality is given. $\square$
+
+**On the role of C3.** Neither proposition uses covariance. C3 acts as an additional filter on *which* assignments are physically admissible (it rules out frame-dependent descriptors), but the convergence to the algebra–state pair is driven entirely by the interplay of operational completeness (C1), restriction compatibility (C2), and no-redundancy (C4s). This is by design: the convergence argument should work in any AQFT setting, whether or not a nontrivial symmetry group acts.
+
+**On the triviality of the proofs.** The proofs are deliberately short. The mathematical content is a straightforward application of the first isomorphism theorem (for Prop 1) and the definition of bijection (for Prop 2). The work of the argument is not in the proofs but in the *formulation*: making precise what "intrinsic nature" means (a presheaf with a decoding map), what "no extra structure" means (C4s), and what the convergence target is (the state presheaf). A proof assistant would verify these claims in a few lines; the value of formalization here is in forcing the type signatures and naturality conditions to be explicit, not in discharging difficult obligations. (See Appendix B for formalization-ready type signatures.)
+
+-----
+
+### Corollary (Actual-World Specialization)
+
+Let $i$ be a section of $I$ representing the actual intrinsic nature at each region. Then $\delta \circ i$ is a compatible family of states. If the theory stipulates that the actual operational content matches the physical state — $\delta_D(i_D) = \omega_D$ for all $D$ — then in the strong case ($I \cong \Omega$), the actual intrinsic-nature descriptor at $D$ is identified with $\omega_D$ itself.
+
+The quality object at $D$ is therefore $Q(D) = (\mathcal{A}(D), \omega_D)$: the local algebra (encoding which observables exist in $D$) together with the local state (encoding their actual expectation values).
+
+-----
+
+### Quality Identity (QI) — The Interpretive Postulate
+
+Everything above is mathematics. Propositions 1 and 2 say: *if you want an intrinsic-nature assignment that determines all internal statistics, respects restriction, and contains no operationally invisible surplus, you are forced into the local state on the local algebra.*
+
+They do not say this object *is* phenomenal quality. That identification is IQT's foundational postulate:
+
+> **Quality Identity (QI).** For each bounded spacetime region $D$, phenomenal quality is the algebra–state pair $Q(D) = (\mathcal{A}(D), \omega_D)$.
+
+QI is not derivable from C1–C4. It is an additional metaphysical commitment: that the mathematical object singled out by the constraint argument is, in fact, the bearer of phenomenal character. Its support is abductive:
+
+- **Convergence** (this section): the algebra–state pair is the unique candidate surviving the constraints, given C4s.
+- **Structural richness** (§§1.2–1.4): the pair has the right kind of structure — high-dimensional, non-classical, sensitive to entanglement — to ground the diversity and unity of conscious experience.
+- **Empirical bridge** (§§2–4): the effective-theory framework provides a concrete pathway from the fundamental algebra–state pair to neural-scale observables, yielding testable predictions.
+
+The constraint argument does not prove QI. It narrows the field to one candidate and then invites the reader to evaluate that candidate on explanatory grounds.
 
 
 ## 1.2 The Definition of Quality
@@ -1336,6 +1472,58 @@ Unity functional  as concrete composition measure distinct from  (§3.3). Narrat
 ## A.3 For Philosophers of Mind
 
 Identity theory with Intrinsicness Principle and worked example (§1.3); honest epistemic status (§1.4); constraint dialectic (§1.1); dissolution of subject selection via three-level analysis (§4.4) with eliminativism response and deflationary democracy framing. Democracy of diamonds replaces binary subject/non-subject distinction. Positioning relative to Goff, Seager, and Russellian panqualityism (§6).
+
+
+# Appendix B: Formalization-Ready Type Signatures
+
+For the formalization project, the structures of §1.1 have precise type signatures in Lean 4. We record them here for reference; this is a skeleton, not compilable code.
+
+```
+-- The net: a covariant functor from regions to C*-algebras.
+-- (Lean/Mathlib: define over a Preorder, targeting CStarAlg.)
+variable (Reg : Type) [Preorder Reg]
+variable (A : Reg → CStarAlg)  -- the net
+variable (ι : ∀ {D₁ D₂}, D₁ ≤ D₂ → StarAlgHom (A D₁) (A D₂))  -- isotony
+
+-- States on a C*-algebra (positive normalized linear functionals).
+-- Mathlib does not bundle this as a type yet; define as a structure.
+structure CStarState (B : CStarAlg) where
+  toFun : B →ₗ[ℂ] ℂ
+  pos   : ∀ a, 0 ≤ toFun (star a * a)
+  norm  : toFun 1 = 1
+
+-- The state presheaf Ω : Reg^op → Set.
+-- Ω(D) = CStarState (A D), with restriction by precomposition.
+def Ω (D : Reg) : Type := CStarState (A D)
+def Ω.restrict {D₁ D₂ : Reg} (h : D₁ ≤ D₂) (ρ : Ω A D₂) : Ω A D₁ :=
+  ⟨ρ.toFun.comp (ι h), ..., ...⟩
+
+-- An intrinsic-nature assignment: presheaf I with decoding δ into Ω.
+structure IntrinsicAssignment where
+  I : Reg → Type                                         -- descriptor presheaf
+  restrict : ∀ {D₁ D₂}, D₁ ≤ D₂ → I D₂ → I D₁         -- restriction
+  δ : ∀ D, I D → Ω A D                                   -- decoding
+  natural : ∀ {D₁ D₂} (h : D₁ ≤ D₂) (x : I D₂),        -- naturality
+    δ D₁ (restrict h x) = Ω.restrict A ι h (δ D₂ x)
+
+-- C4s: no-junk extensionality.
+def NoJunk (X : IntrinsicAssignment Reg A ι) : Prop :=
+  ∀ D, Function.Injective (X.δ D)
+
+-- Operational equivalence.
+def opEquiv (X : IntrinsicAssignment Reg A ι) (D : Reg) (x y : X.I D) : Prop :=
+  X.δ D x = X.δ D y
+
+-- Convergence (strong form): if NoJunk and δ is surjective, then I ≅ Ω.
+-- (The proof is componentwise bijection + naturality — a few lines.)
+theorem convergence_strong (X : IntrinsicAssignment Reg A ι)
+    (hInj : NoJunk Reg A ι X)
+    (hSurj : ∀ D, Function.Surjective (X.δ D)) :
+    ∀ D, Function.Bijective (X.δ D) :=
+  fun D => ⟨hInj D, hSurj D⟩
+```
+
+The main infrastructure gap for a full formalization is the AQFT layer underneath — the Haag–Kastler axioms, causal diamonds, microcausality — none of which is in Mathlib or PhysLean yet. The convergence theorem itself is straightforward once the type signatures compile.
 
 
 # References
