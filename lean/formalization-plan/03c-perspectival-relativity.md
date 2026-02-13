@@ -16,7 +16,7 @@ Formalize the central structural commitment of IQT: perspectival relativity. Qua
 ### 1. Quality at Every Region
 
 ```lean
-/-- Every region has quality. This is Level 0 of IQT's three-level hierarchy.
+/-- Every region has quality. This is Filter 0 of IQT's three-filter hierarchy.
     There is no exclusion step selecting "the" conscious region. -/
 theorem quality_universal (N : LocalNet Reg) (ω : CompatibleFamily N) :
     ∀ D : Reg, Nonempty (StateSpace N D) := by
@@ -48,7 +48,7 @@ theorem quality_consistent (N : LocalNet Reg) (ω : CompatibleFamily N)
 
 ```lean
 /-- IQT's democracy of diamonds: there is no selection step that picks one region
-    as "the" conscious one. Every region has quality (Level 0).
+    as "the" conscious one. Every region has quality (Filter 0).
     Contrast with IIT's exclusion postulate. -/
 -- This is a definitional property: Quality and Unity are defined for ALL regions.
 -- No `max_unity_region` selection function is defined or needed.

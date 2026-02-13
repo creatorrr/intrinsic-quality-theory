@@ -1,7 +1,7 @@
-# Phase 4a: Self-Threads (Level 1 Experience)
+# Phase 4a: Self-Threads (Filter 1 Experience)
 
 **Phase:** 04 - Self-Threads & Narrative Operator
-**Track:** Consciousness Levels
+**Track:** Consciousness Filters
 **Depends on:** 01d (state presheaf), 03b (unity functional), 03c (perspectival relativity)
 **Unlocks:** 04b (narrative operator), 05b (metric formalization)
 
@@ -9,7 +9,7 @@
 
 ## Goal
 
-Formalize self-threads from Section 4.4: directed families of overlapping diamonds whose qualities persist over time and are causally semi-autonomous. Self-threads are the Level 1 criterion for *experience* (as distinguished from mere quality at Level 0).
+Formalize self-threads from Section 4.4: directed families of overlapping diamonds whose qualities persist over time and are causally semi-autonomous. Self-threads are the Filter 1 criterion for *experience* (as distinguished from mere quality at Filter 0).
 
 ## What to Formalize
 
@@ -63,7 +63,7 @@ class CausallySemiAutonomous (N : LocalNet Reg) (ω : CompatibleFamily N)
 
 ```lean
 /-- A self-thread: a temporal chain of diamonds that is both persistent and
-    causally semi-autonomous. This is Level 1 (Experience). -/
+    causally semi-autonomous. This is Filter 1 (Experience). -/
 structure SelfThread (Reg : Type) [Preorder Reg] (N : LocalNet Reg)
     (ω : CompatibleFamily N) extends TemporalChain Reg where
   persistent : Persistent N ω toTemporalChain
@@ -82,18 +82,18 @@ noncomputable def temporalDepth (st : SelfThread Reg N ω) : ℝ :=
   sorry
 ```
 
-### 6. Three-Level Hierarchy
+### 6. Three-Filter Hierarchy
 
 ```lean
-/-- Level 0: Quality. Every region has it. Universal. -/
+/-- Filter 0: Quality. Every region has it. Universal. -/
 -- (This is Phase 03c: quality_universal.)
 
-/-- Level 1: Experience. Requires a self-thread (persistence + autonomy). -/
+/-- Filter 1: Experience. Requires a self-thread (persistence + autonomy). -/
 def hasExperience (N : LocalNet Reg) (ω : CompatibleFamily N)
     (chain : TemporalChain Reg) : Prop :=
   ∃ st : SelfThread Reg N ω, st.toTemporalChain = chain
 
-/-- Level 2: Report. Requires a narrative operator with readout dominance.
+/-- Filter 2: Report. Requires a narrative operator with readout dominance.
     (Defined in Phase 04b.) -/
 ```
 
@@ -101,7 +101,7 @@ def hasExperience (N : LocalNet Reg) (ω : CompatibleFamily N)
 
 ```lean
 /-- Two self-threads can overlap in space while being semi-autonomous.
-    This is the democracy of diamonds at Level 1.
+    This is the democracy of diamonds at Filter 1.
     (Protocol 2 tests this prediction.) -/
 def overlapping (st₁ st₂ : SelfThread Reg N ω) : Prop :=
   ∃ t₁ t₂, st₁.diamond t₁ = st₂.diamond t₂ ∨
@@ -119,7 +119,7 @@ def overlapping (st₁ st₂ : SelfThread Reg N ω) : Prop :=
 - [ ] `Persistent` and `CausallySemiAutonomous` typeclasses compile
 - [ ] `SelfThread` structure compiles
 - [ ] `temporalDepth` is defined (even if noncomputable/sorry)
-- [ ] `hasExperience` predicate at Level 1 is defined
+- [ ] `hasExperience` predicate at Filter 1 is defined
 - [ ] Overlap of self-threads is definable
 
 ## Notes

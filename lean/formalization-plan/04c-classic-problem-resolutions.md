@@ -42,16 +42,16 @@ theorem no_regress (N : LocalNet Reg) (ω : CompatibleFamily N) (D : Reg) :
 
 ### 3. Subject Selection Dissolution (Section 4.4)
 
-> "All diamonds have quality (Level 0). The interesting question is which diamonds sustain self-threads (Level 1) and which control report (Level 2)."
+> "All diamonds have quality (Filter 0). The interesting question is which diamonds sustain self-threads (Filter 1) and which control report (Filter 2)."
 
 ```lean
-/-- The subject selection problem is dissolved by the three-level hierarchy.
-    Level 0: Every region has quality (quality_universal).
-    Level 1: Self-threads have experience (hasExperience).
-    Level 2: Narrative operators have report (hasReport).
+/-- The subject selection problem is dissolved by the three-filter hierarchy.
+    Filter 0: Every region has quality (quality_universal).
+    Filter 1: Self-threads have experience (hasExperience).
+    Filter 2: Narrative operators have report (hasReport).
     There is no need for a metaphysical "selector" picking "the" subject. -/
 -- The hierarchy is: quality_universal → hasExperience → hasReport
--- Each level is strictly narrower: Level 2 ⊂ Level 1 ⊂ Level 0.
+-- Each filter is strictly narrower: Filter 2 ⊂ Filter 1 ⊂ Filter 0.
 ```
 
 ### 4. Substrate Dependence (Section 4.3)
@@ -78,12 +78,12 @@ theorem no_regress (N : LocalNet Reg) (ω : CompatibleFamily N) (D : Reg) :
 ## Acceptance Criteria
 
 - [ ] Each resolution is stated as a comment or lightweight theorem
-- [ ] The three-level hierarchy (Level 0/1/2) is explicitly documented
+- [ ] The three-filter hierarchy (Filter 0/1/2) is explicitly documented
 - [ ] The resolutions reference the formal structures from earlier phases
 - [ ] No new heavy Lean code — this is primarily a documentation/structuring task
 
 ## Notes
 
 - These are NOT deep formal proofs. They are observations that the type structure makes certain problems structurally dissoluble.
-- The paper says (Section 4): "IQT dissolves the Hard Problem at Level 0 by the identity thesis. The interesting scientific questions live at Levels 1 and 2."
+- The paper says (Section 4): "IQT dissolves the Hard Problem at Filter 0 by the identity thesis. The interesting scientific questions live at Filters 1 and 2."
 - This phase exists to show that the formalization has explanatory reach beyond the convergence theorem.

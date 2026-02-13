@@ -3,7 +3,7 @@
 **Version:** 1.0
 **Date:** February 2026
 **Target:** Lean 4.27.0 + Mathlib + PhysLean
-**Source Theory:** IQT v1.7.2 (iqt.md)
+**Source Theory:** IQT v1.8 (iqt.md)
 
 ---
 
@@ -82,8 +82,8 @@ Phase 06: Protocol Predictions ────────────────�
 
 | File | Title | Difficulty | Key Deliverable |
 |------|-------|------------|-----------------|
-| [04a](04a-self-threads.md) | Self-Threads (Level 1) | Medium | `SelfThread`, persistence + autonomy |
-| [04b](04b-narrative-operator.md) | Narrative Operator (Level 2) | Medium | `NarrativeOperator`, five-step pipeline |
+| [04a](04a-self-threads.md) | Self-Threads (Filter 1) | Medium | `SelfThread`, persistence + autonomy |
+| [04b](04b-narrative-operator.md) | Narrative Operator (Filter 2) | Medium | `NarrativeOperator`, five-step pipeline |
 | [04c](04c-classic-problem-resolutions.md) | Classic Problem Resolutions | Low | Mary's Room, regress, subject selection |
 
 ### Phase 05 — Effective Theory Bridge
