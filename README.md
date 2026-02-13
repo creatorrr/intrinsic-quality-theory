@@ -6,6 +6,12 @@ Draft v1.7.1 | February 2026 | Diwank Singh Tomer
 
 ---
 
+## New to IQT?
+
+Start with the **[Gentle Introduction](./INTRODUCTION.md)** — a lay reader's guide that explains all the core ideas without the math, walks through the three proposed experiments, and tells you exactly which parts of the full paper to read (and which to skip).
+
+---
+
 ## The core claim
 
 Consciousness is not produced by brains. It is what physical states are, from the inside.
