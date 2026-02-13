@@ -8,11 +8,11 @@
 
 ## What is this paper about?
 
-There is a deep mystery at the heart of science called the **Hard Problem of Consciousness**: how does the wet, squishy matter inside your skull generate the invisible, private feeling of *having an experience*? Why does seeing red *feel* like something? Why isn't the brain just a biological machine that processes light wavelengths without any inner experience at all?
+Psilocybin stretches your sense of time. Ketamine shatters it into fragments. DMT dissolves it entirely. These aren't just trip reports — they are quantitative predictions, derived from geometry, made by a new theory of consciousness. The theory says that these substances physically reshape the spacetime region over which your brain integrates information, and that the *felt change in temporal experience* follows from that reshaping as a mathematical consequence.
 
-This problem has haunted philosophy and science for centuries. We can explain how light hits the retina, how neurons fire, how signals propagate through the visual cortex — but none of that explains *why there is something it is like* to see red. You could build a perfect robot that detects wavelengths and says "that's red," but there would be nobody home. No felt redness. The Hard Problem asks: where does that felt quality come from?
+That theory is **Intrinsic Quality Theory (IQT)**. It is an attempt to solve the deepest open problem in science: the **Hard Problem of Consciousness**. How does the physical matter inside your skull generate the invisible, private feeling of *having an experience*? Why does seeing red *feel* like something? You could build a perfect robot that detects wavelengths and says "that's red," but there would be nobody home. No felt redness. Where does that come from?
 
-Science has traditionally assumed the brain acts like a factory that *produces* consciousness, much like a stomach produces digestion. **Intrinsic Quality Theory (IQT)** says this is the wrong way to think about it — and proposes a radically different answer backed by concrete, testable laboratory experiments.
+Science has traditionally assumed the brain *produces* consciousness, the way a stomach produces digestion. IQT says this is the wrong framing. It proposes something more radical — and then backs it up with three concrete laboratory experiments, each with pre-specified conditions under which the theory would be considered wrong.
 
 ---
 
@@ -35,16 +35,16 @@ IQT's central claim is that this object — which physics already uses for its o
 
 ### Why this object and nothing else? The constraint argument
 
-This isn't just philosophical hand-waving. The paper shows that if you write down four reasonable requirements for "the intrinsic nature of a physical region," only one mathematical object in all of physics satisfies them:
+This claim isn't arbitrary. The paper shows that if you write down four reasonable requirements for "the intrinsic nature of a physical region," only one mathematical object in all of physics satisfies them:
 
 1. **Completeness.** It must determine every measurement outcome and every correlation inside the region. Nothing is left unspecified.
 2. **Nesting consistency (isotony).** If you zoom in from a large region to a smaller one inside it, the smaller region's intrinsic nature must be derivable from the larger one's — you can't get contradictions when you change scale.
 3. **Covariance.** It must not depend on your choice of coordinate system or reference frame. The intrinsic nature of a region shouldn't change just because you relabeled the points.
 4. **No junk (perspectival completeness).** It must contain no surplus information — nothing beyond what shows up in actual measurements. Two descriptions that produce identical measurement results for every possible experiment should count as the same description.
 
-The algebra-state pair satisfies all four. Nothing else does. This is a mathematical result within AQFT, proven in the paper (Propositions 1 and 2 in Section 1.1 for those who want the proof). There is no runner-up.
+The algebra-state pair satisfies all four. The paper proves (Propositions 1 and 2 in Section 1.1) that no other mathematical object does. The constraints are individually modest — none of them mentions consciousness — but together they are surprisingly restrictive. They leave exactly one candidate standing.
 
-The identification of this mathematical object with consciousness — what the paper calls **QI** (the Quality Identity) — is still a postulate. It is a bet. But it is a bet on the only horse in the race. And the paper's argument is that this bet earns its keep by generating a cascade of consequences — composition, temporal phenomenology, solutions to classic puzzles, testable predictions — that no competing identification currently matches.
+The identification of this candidate with consciousness — what the paper calls **QI** (the Quality Identity) — is still a postulate. It is a philosophical commitment, not a theorem. But the paper's argument is that this postulate earns its keep: it generates composition for free, predicts temporal phenomenology from geometry, dissolves classic puzzles in philosophy of mind, and yields three pre-registerable experiments. The question is whether any competing identification of consciousness with a mathematical object currently delivers comparable explanatory yield. So far, none does.
 
 ---
 
@@ -73,9 +73,13 @@ A rival theory of consciousness called **Integrated Information Theory (IIT)** s
 
 IQT disagrees. It argues that your visual cortex has its own quality, your auditory cortex has its own quality, and the combination of the two has a bigger, richer quality that includes information invisible to either part alone (the cross-regional correlations). They all overlap, and they all exist simultaneously.
 
-IQT calls this **perspectival relativity**: there is no God's-eye view that picks out the "correct" level at which consciousness happens. A neuron's quality doesn't include information about what the motor cortex is doing — it can't "see" that far. The whole-brain quality includes all of that, but at coarser resolution. They are different perspectives on the same physical system, like how a city looks different from street level versus satellite view — both views are real, neither is *the* truth.
+IQT calls this **perspectival relativity**, and a concrete analogy helps make it tangible. Think of a newspaper photograph. Viewed from normal reading distance, you see a face. Get closer, and you see individual dots of ink. Get closer still, and you see the texture of the paper fibers under each dot. The face, the dot pattern, and the fiber texture are all real features of the same physical object — but they exist at different scales, and no single scale is "the real one." The face is not an illusion just because it's made of dots. The dots are not irrelevant just because they compose a face. Each scale reveals structure invisible to the others.
 
-The radical implication: overlapping regions can all bear quality simultaneously. The region covering your visual cortex plus your auditory cortex has its own quality. So does just your visual cortex. So does your auditory cortex plus your prefrontal cortex. They overlap, and they are all real. IQT calls this the **democracy of diamonds** — every causally bounded region gets a vote. There is no fact of the matter about "how many conscious beings" are in a brain. The question is ill-posed. There are many overlapping regions, each with quality. Some sustain self-threads. Some of those run narrative operators. The boundaries between "subjects" are empirical and fuzzy, not metaphysical and sharp.
+IQT says consciousness works this way. A neuron's quality doesn't include information about what the motor cortex is doing — it can't "see" that far. The whole-brain quality includes all of that, but at coarser resolution. They are different perspectives on the same physical system. Both are real. Neither is *the* truth.
+
+The implication goes further: overlapping regions can all bear quality simultaneously. The region covering your visual cortex plus your auditory cortex has its own quality. So does just your visual cortex. So does your auditory cortex plus your prefrontal cortex. They overlap, and they are all real. IQT calls this the **democracy of diamonds** — every causally bounded region gets a vote.
+
+This means the question "how many conscious beings are in a brain?" is, for IQT, ill-posed — like asking "how many shapes are in a cloud?" There are many overlapping regions, each with quality. Some sustain self-threads (Level 1). Some of those run narrative operators (Level 2). Normally, the dominant self-threads in your brain are so tightly correlated that the narrative operator builds a unified self-model, producing the feeling of being a single "I." But this unity is a product of correlation, not a metaphysical given. Cut the correlations — as happens in split-brain surgery — and the unity comes apart, even if the narrator keeps reporting it (more on this below).
 
 ### 3. The Shape of Spacetime = The Shape of Experience
 
@@ -95,13 +99,19 @@ These are not after-the-fact explanations. They are predictions that fall direct
 
 ### 4. Why Time Feels Like It "Flows"
 
-One of IQT's most striking claims is about the *passage* of time — the feeling that "now" is constantly sliding forward, that the present is always being replaced.
+One of IQT's most striking claims is about the *passage* of time — the nagging feeling that "now" is constantly sliding forward, that the present is always being replaced by a new present.
 
-IQT says: time doesn't actually flow. The feeling of passage is what it's like to be a *finite-bandwidth narrator* tracking your own trajectory through a four-dimensional quality landscape.
+This feeling is so fundamental to human experience that we rarely question it. But physicists have long been puzzled by it: the equations of physics don't contain a "moving now." The laws work the same whether you play them forward or backward. So where does the feeling of flow come from?
 
-Here is what that means. Your narrative operator — the system that compresses your self-thread into a reportable self-model — can only hold a thin temporal slice at once (roughly 100 ms to 1 second of content). Each update sheds trailing content and acquires leading content. That sequential shedding-and-acquiring *is* the phenomenology of passage. Time doesn't move. Your narrator's window slides.
+IQT's answer has two parts, and it helps to take them one at a time.
 
-A thought experiment makes this vivid: an infinite-bandwidth narrator (purely hypothetical — no real system could be one) would still run forward, because computation at macroscopic scales is irreversible. But it would not *feel* time passing. It would hold its entire trajectory at once — the whole story simultaneously, with no sense of "now" sliding along. The *direction* of time comes from thermodynamics (entropy increases). The *texture* of passage — the feeling that moments are slipping away — comes from finite bandwidth.
+**Part 1: Your narrator has a window.** The narrative operator — the system that compresses your self-thread into a reportable self-model (the "I") — can only hold a limited amount of temporal content at once. Think of it like a spotlight sliding along a strip of film. The film is all there, laid out in four dimensions. But the spotlight can only illuminate a short segment at any moment — roughly 100 milliseconds to 1 second of content, depending on the person and the situation.
+
+**Part 2: The window slides.** Each time the narrator updates, it sheds the trailing edge of its content and picks up new content at the leading edge. Yesterday's breakfast is gone from the window. The word you're reading right now is entering it. That sequential shedding-and-acquiring — old content dropping away, new content arriving — *is* the felt passage of time. It's not that time is moving past you. It's that your narrator's window is moving along the four-dimensional quality landscape, and the movement of the window is the experience of flow.
+
+Now consider a thought experiment that sharpens the claim. Imagine a hypothetical narrator with *infinite* bandwidth — one that could hold its entire history at once, rather than just a thin slice. (No real system could do this; it's a thought experiment.) Such a narrator would still run forward — computation at macroscopic scales is irreversible, because entropy increases. But it would not *feel* time passing. It would hold its entire trajectory simultaneously, the way you can hold an entire melody in memory after hearing it. There would be no sense of "now" sliding along, because nothing would be dropping off the trailing edge.
+
+This is the distinction IQT draws: the *direction* of time is constituted by thermodynamics (entropy increases, so there's an arrow). But the *texture* of passage — the feeling that moments are slipping away, that "now" is always being replaced — is constituted by finite bandwidth. Change the bandwidth, and you change the feeling. This is exactly what the psychedelic predictions in the previous section are testing.
 
 ### 5. The Composition Problem: What's the "Glue"?
 
@@ -127,7 +137,25 @@ The crucial claim: this effective algebra is still a *local algebra* in the form
 
 What prevents circularity is that the coarse-graining is constrained by physics, not fitted to results. The pre-registration protocols lock down brain parcellation, frequency bands, and analysis pipelines *before* data collection, specifically to block post-hoc adjustment. Without this bridge, IQT would be philosophy. With it, the three experimental protocols become principled tests of a theory formulated in the language of physics.
 
-The paper flags the effective-theory bridge as the weakest structural element — the place where the theory is most vulnerable and most in need of future work. This honesty is itself part of the theory's design: IQT is built to fail in specific, informative ways (see Ramification 6 below).
+The paper flags the effective-theory bridge as the weakest structural element and the most open area for future work. This is worth noting because it matters for the next section.
+
+---
+
+## Where to Disagree
+
+Before walking through the experiments, it is worth pausing on something unusual about IQT: the paper is explicit about where and how to reject it. The theory is built in layers, and you can peel off later layers while keeping earlier ones. Here is the map of disagreement:
+
+- **Reject QI entirely?** The constraint argument still gives you a novel characterization of "intrinsic nature" in physics. The formalism stands as a contribution to the metaphysics of local physics, independent of consciousness. You're a property dualist. The cost: you need separate mechanisms for composition, subject selection, and temporal phenomenology — three things QI handles with one postulate.
+
+- **Accept QI, reject democracy?** You accept that quality is the algebra-state pair but want an exclusion principle selecting one region per brain. You're doing IIT with a different ontology. Protocol 2 (below) is designed to settle this.
+
+- **Accept QI and democracy, doubt the narrative operator?** The bridge hypotheses are the most revisable component of the theory. The experimental predictions are what fail for you, not the ontology itself.
+
+- **Doubt the effective-theory bridge?** The jump from AQFT to neural-scale metrics is the weakest structural element, and the paper flags it openly as an open problem (Section 7). The protocols test the effective-level predictions; the fundamental-to-effective bridge is a separate research program.
+
+This layered vulnerability is deliberate. IQT is designed so that the *pattern* of experimental failure is diagnostic: if one experiment works but another fails, you know which layer to revise. If everything fails, the identity thesis hasn't earned its keep. The theory doesn't ask for all-or-nothing belief. It asks you to specify where you get off.
+
+With that in mind, here are the experiments.
 
 ---
 
@@ -155,7 +183,7 @@ After the surgery, the self-threads decouple. They are now two disjoint (non-ove
 
 ## How Will It Be Tested?
 
-A theory that can't be tested is just philosophy. IQT proposes three real-world experiments designed to prove it right — or prove it wrong. Each experiment includes explicit **failure conditions**: outcomes that would force the theory to be revised or abandoned. The theory is deliberately built in layers — core postulate, bridge hypotheses, operationalizations, protocols — so that the *pattern* of failure is diagnostic. If one experiment works but another fails, you know which layer to revise.
+A theory that can't be tested is just philosophy. IQT proposes three real-world experiments, each with explicit **failure conditions** — outcomes that would force the theory to be revised or abandoned.
 
 ### Protocol 1: The Anesthesia Test
 
@@ -274,23 +302,9 @@ If you want a more directed route through the full paper:
 
 ---
 
-## Where to Disagree
-
-IQT is built in layers, and you can reject a later layer while keeping earlier ones. The paper is refreshingly explicit about this:
-
-- **Reject QI entirely?** The constraint argument still gives you a novel characterization of "intrinsic nature" in physics. The formalism stands as a contribution to the metaphysics of local physics, independent of consciousness. You're a property dualist. The cost: you need separate mechanisms for composition, subject selection, and temporal phenomenology — three things QI handles with one postulate.
-
-- **Accept QI, reject democracy?** You accept that quality is the algebra-state pair but want an exclusion principle selecting one region per brain. You're doing IIT with a different ontology. Protocol 2 is designed to settle this.
-
-- **Accept QI and democracy, doubt the narrative operator?** The bridge hypotheses are the most revisable component of the theory. The experimental predictions are what fail for you, not the ontology itself.
-
-- **Doubt the effective-theory bridge?** The jump from AQFT to neural-scale metrics is the weakest structural element, and the paper flags it openly as an open problem (Section 7). The protocols test the effective-level predictions; the fundamental-to-effective bridge is a separate research program.
-
----
-
 ## Summary
 
-IQT makes a single, bold bet: consciousness and physical states aren't two things connected by a mysterious bridge — they're one thing seen from two sides. The paper turns that bet into rigorous mathematics, shows it's the *only* bet the math allows, derives surprising predictions about anesthesia, overlapping brain activity, psychedelic time distortion, the flow of time, and classic philosophical puzzles — and specifies exactly what results would prove it wrong.
+IQT makes a single, bold bet: consciousness and physical states aren't two things connected by a mysterious bridge — they're one thing seen from two sides. The paper turns that bet into rigorous mathematics, shows it is the only identification the constraints allow, derives surprising predictions about anesthesia, overlapping brain activity, psychedelic time distortion, the flow of time, and classic philosophical puzzles — and specifies exactly what results would prove it wrong.
 
 Whether or not you find the central identity thesis convincing, the framework delivers something rare in consciousness science: a theory that is precise enough to be falsified, honest about where it's weakest, and designed so that even its failures would be informative.
 
