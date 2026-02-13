@@ -44,7 +44,9 @@ This claim isn't arbitrary. The paper shows that if you write down four reasonab
 
 The algebra-state pair satisfies all four. The paper proves (Propositions 1 and 2 in Section 1.1) that no other mathematical object does. The constraints are individually modest — none of them mentions consciousness — but together they are surprisingly restrictive. They leave exactly one candidate standing.
 
-The identification of this candidate with consciousness — what the paper calls **QI** (the Quality Identity) — is still a postulate. It is a philosophical commitment, not a theorem. But the paper's argument is that this postulate earns its keep: it generates composition for free, predicts temporal phenomenology from geometry, dissolves classic puzzles in philosophy of mind, and yields three pre-registerable experiments. The question is whether any competing identification of consciousness with a mathematical object currently delivers comparable explanatory yield. So far, none does.
+The identification of this candidate with consciousness — what the paper calls **QI** (the Quality Identity) — is still a postulate. It is a philosophical commitment, not a theorem. The constraints narrow the field to one candidate; they do not tell you that the candidate *is* consciousness. That is a separate step.
+
+So the question shifts from "is this identification proven?" (it isn't) to "does the postulate earn its keep empirically?" The paper argues that it does: QI generates composition for free, predicts temporal phenomenology from geometry, dissolves classic puzzles in philosophy of mind, and yields three pre-registerable experiments. No competing identification of consciousness with a mathematical object currently delivers comparable explanatory yield.
 
 ---
 
