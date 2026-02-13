@@ -185,7 +185,7 @@ When surgeons sever the corpus callosum (the thick bundle of nerves connecting t
 
 IQT says: before the surgery, the two hemispheres each sustained their own self-threads, but those threads were tightly correlated through the corpus callosum, producing a sense of unity. The narrative operator (living primarily in the left hemisphere, which controls speech) built a unified self-model based on all that cross-hemisphere information.
 
-After the surgery, the self-threads decouple. They are now two disjoint (non-overlapping) regions, each with its own quality. But the left hemisphere's narrator hasn't been updated; it continues reporting unity that it no longer actually has. The continued *report* of being a single self is evidence that the narrator's self-model is stale, not evidence of actual unity.
+After the surgery, the correlation structure changes: the two hemispheres' quality-streams become causally disjoint. They are now two non-overlapping regions, each with its own quality. But the left hemisphere's narrator hasn't been updated — its compression index still reflects the old correlation structure. It continues reporting unity that it no longer has. The continued *report* of being a single self is evidence that the narrator's self-model is stale, not evidence of actual unity.
 
 ---
 
