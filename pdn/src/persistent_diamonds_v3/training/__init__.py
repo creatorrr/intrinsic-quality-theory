@@ -7,6 +7,7 @@ from persistent_diamonds_v3.training.distill import (
 )
 from persistent_diamonds_v3.training.stage1 import Stage1JEPATrainer, Stage1Result
 from persistent_diamonds_v3.training.stage2 import Stage2Result, Stage2ShapingTrainer
+from persistent_diamonds_v3.training.stage4 import Stage4EmbodiedTrainer, Stage4Result
 
 __all__ = [
     "DistillationResult",
@@ -18,4 +19,6 @@ __all__ = [
     "Stage1Result",
     "Stage2Result",
     "Stage2ShapingTrainer",
+    "Stage4EmbodiedTrainer",
+    "Stage4Result",
 ]

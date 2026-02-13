@@ -22,11 +22,13 @@ from persistent_diamonds_v3.evaluation.protocols import (
     run_protocol3,
 )
 from persistent_diamonds_v3.models import ControlHead, DiscreteNarrator, ModularSSMWorldModel, ReportHead
+from persistent_diamonds_v3.data.env.gridworld import GridWorldConfig
 from persistent_diamonds_v3.training import (
     DistillationTrainer,
     NarratorTextDataset,
     Stage1JEPATrainer,
     Stage2ShapingTrainer,
+    Stage4EmbodiedTrainer,
     build_synthetic_distillation_corpus,
     load_tokenizer,
 )
@@ -324,6 +326,83 @@ def train_distill(
         typer.echo(f"  KL={result.final_loss_kl:.4f} CE={result.final_loss_ce:.4f} hidden={result.final_loss_hidden:.4f}")
     typer.echo(f"Saved: {report_out}")
     typer.echo(f"Metadata: {metadata}")
+
+
+@app.command("train-stage4")
+def train_stage4(
+    config_path: Path = Path("pdv3.yaml"),
+    world_checkpoint: Path | None = None,
+    narrator_checkpoint: Path | None = None,
+    save_dir: Path = Path("artifacts"),
+):
+    """Stage 4: Embodied grounding via closed-loop gridworld interaction."""
+    cfg = _load_config(config_path)
+    world, narrator = _build_world_narrator(cfg)
+
+    if world_checkpoint and world_checkpoint.exists():
+        world.load_state_dict(_load_weights(world_checkpoint))
+    if narrator_checkpoint and narrator_checkpoint.exists():
+        narrator.load_state_dict(_load_weights(narrator_checkpoint))
+
+    narrator_dim = cfg.narrator.codes_per_step * cfg.narrator.code_dim
+    control_head = ControlHead(
+        narrator_dim=narrator_dim,
+        action_dim=4,  # gridworld has 4 discrete actions
+        hidden_dim=cfg.control_head.hidden_dim,
+    )
+
+    trainer = Stage4EmbodiedTrainer(
+        world_model=world,
+        narrator=narrator,
+        control_head=control_head,
+        stage4_cfg=cfg.stage4,
+        input_dim=cfg.world_model.input_dim,
+        learning_rate=cfg.train.learning_rate,
+        weight_decay=cfg.train.weight_decay,
+        device=cfg.train.device,
+    )
+
+    env_config = GridWorldConfig(
+        grid_size=cfg.stage4.grid_size,
+        max_episode_steps=cfg.stage4.max_episode_steps,
+    )
+
+    result = trainer.train(
+        max_steps=min(cfg.train.max_steps, 500),
+        env_config=env_config,
+    )
+
+    save_dir.mkdir(parents=True, exist_ok=True)
+    world_out = save_dir / "world_stage4.pt"
+    narrator_out = save_dir / "narrator_stage4.pt"
+    control_out = save_dir / "control_stage4.pt"
+    torch.save(world.state_dict(), world_out)
+    torch.save(narrator.state_dict(), narrator_out)
+    torch.save(control_head.state_dict(), control_out)
+
+    metadata_path = save_dir / "stage4_result.json"
+    metadata_path.write_text(
+        json.dumps(
+            {
+                "final_loss": result.final_loss,
+                "mean_episode_reward": result.mean_episode_reward,
+                "mean_episode_length": result.mean_episode_length,
+                "goal_rate": result.goal_rate,
+                "steps": result.steps,
+            },
+            indent=2,
+        )
+    )
+
+    typer.echo(
+        f"Stage 4 complete. loss={result.final_loss:.4f} "
+        f"reward={result.mean_episode_reward:.3f} "
+        f"goal_rate={result.goal_rate:.2f} steps={result.steps}"
+    )
+    typer.echo(f"Saved: {world_out}")
+    typer.echo(f"Saved: {narrator_out}")
+    typer.echo(f"Saved: {control_out}")
+    typer.echo(f"Metadata: {metadata_path}")
 
 
 @app.command("evaluate")

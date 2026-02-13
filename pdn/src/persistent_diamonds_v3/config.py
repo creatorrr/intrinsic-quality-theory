@@ -81,6 +81,23 @@ class DistillationConfig:
 
 
 @dataclass(slots=True)
+class Stage4Config:
+    """Embodied grounding (Stage 4) hyperparameters."""
+
+    env_name: str = "gridworld"
+    grid_size: int = 8
+    max_episode_steps: int = 64
+    episodes_per_epoch: int = 32
+    gamma: float = 0.99
+    gae_lambda: float = 0.95
+    entropy_coeff: float = 0.01
+    value_coeff: float = 0.5
+    grounded_autonomy_coeff: float = 0.5
+    narrator_consistency_coeff: float = 0.3
+    gradient_clip_norm: float = 1.0
+
+
+@dataclass(slots=True)
 class DataConfig:
     cache_dir: str = ".cache/pdv3/objectives"
     default_num_sequences: int = 512
@@ -104,6 +121,7 @@ class PersistentDiamondsConfig:
     report_head: ReportHeadConfig = field(default_factory=ReportHeadConfig)
     stage2_weights: Stage2LossWeights = field(default_factory=Stage2LossWeights)
     distillation: DistillationConfig = field(default_factory=DistillationConfig)
+    stage4: Stage4Config = field(default_factory=Stage4Config)
     data: DataConfig = field(default_factory=DataConfig)
     train: TrainConfig = field(default_factory=TrainConfig)
 
@@ -117,6 +135,7 @@ class PersistentDiamondsConfig:
             report_head=ReportHeadConfig(**raw.get("report_head", {})),
             stage2_weights=Stage2LossWeights(**raw.get("stage2_weights", {})),
             distillation=DistillationConfig(**raw.get("distillation", {})),
+            stage4=Stage4Config(**raw.get("stage4", {})),
             data=DataConfig(**raw.get("data", {})),
             train=TrainConfig(**raw.get("train", {})),
         )
