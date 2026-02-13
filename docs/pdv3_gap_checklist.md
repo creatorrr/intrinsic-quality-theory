@@ -106,10 +106,10 @@ Status key: `implemented` | `partial` | `missing`
 
 | # | Spec Item | Status | Notes |
 |---|-----------|--------|-------|
-| 5 | CLI commands for all training stages | partial | Stages 1-3 + evaluate + protocol1/protocol2/protocol3 present; no Stage 4 |
-| 6 | Reference configuration (size presets: small/medium/large) | missing | Single default config only |
-| 6 | bf16 / gradient accumulation / activation checkpointing | missing | No training infra switches |
-| 6 | Accelerate integration | missing | Listed in optional deps but not used |
+| 5 | CLI commands for all training stages | implemented | All stages 1-4 + evaluate + protocol1/2/3; --preset and infra flags on all train commands |
+| 6 | Reference configuration (size presets: small/medium/large) | implemented | `from_preset()` in config.py; small/medium/large produce scaled configs |
+| 6 | bf16 / gradient accumulation / activation checkpointing | implemented | `InfraConfig` + `training/infra.py` utilities; CLI --bf16, --grad-accum, --activation-ckpt |
+| 6 | Accelerate integration | implemented | `build_accelerator()` in `training/infra.py`; CLI --use-accelerate |
 
 ## 6. Hard Constraints (Definition of Done)
 
@@ -129,6 +129,6 @@ Status key: `implemented` | `partial` | `missing`
 | Architecture (2.x) | 18 | 0 | 1 | 19 |
 | Training (3.x) | 9 | 1 | 4 | 14 |
 | Evaluation (4.x) | 11 | 0 | 1 | 12 |
-| Infrastructure (5-6.x) | 1 | 0 | 3 | 4 |
+| Infrastructure (5-6.x) | 4 | 0 | 0 | 4 |
 | Hard Constraints | 6 | 0 | 0 | 6 |
-| **Total** | **45** | **1** | **9** | **55** |
+| **Total** | **48** | **1** | **6** | **55** |

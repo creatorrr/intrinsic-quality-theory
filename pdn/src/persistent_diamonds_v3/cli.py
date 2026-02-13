@@ -6,7 +6,7 @@ from pathlib import Path
 import torch
 import typer
 
-from persistent_diamonds_v3.config import PersistentDiamondsConfig
+from persistent_diamonds_v3.config import InfraConfig, PRESET_NAMES, PersistentDiamondsConfig
 from persistent_diamonds_v3.data import (
     CachedNarratorTextDataset,
     IQTObjectiveDataStore,
@@ -36,12 +36,39 @@ from persistent_diamonds_v3.training import (
 app = typer.Typer(help="Persistent Diamonds v3 (IQT architecture research package)")
 
 
-def _load_config(config_path: Path) -> PersistentDiamondsConfig:
+def _load_config(
+    config_path: Path,
+    *,
+    preset: str | None = None,
+) -> PersistentDiamondsConfig:
+    if preset is not None:
+        cfg = PersistentDiamondsConfig.from_preset(preset)
+        cfg.to_yaml(config_path)
+        return cfg
     if config_path.exists():
         return PersistentDiamondsConfig.from_yaml(config_path)
     cfg = PersistentDiamondsConfig()
     cfg.to_yaml(config_path)
     return cfg
+
+
+def _apply_infra_overrides(
+    cfg: PersistentDiamondsConfig,
+    *,
+    bf16: bool | None,
+    grad_accum: int | None,
+    activation_ckpt: bool | None,
+    use_accelerate: bool | None,
+) -> None:
+    """Merge CLI infra flags into the config (CLI wins over file)."""
+    if bf16 is not None:
+        cfg.infra.bf16 = bf16
+    if grad_accum is not None:
+        cfg.infra.gradient_accumulation_steps = grad_accum
+    if activation_ckpt is not None:
+        cfg.infra.activation_checkpointing = activation_ckpt
+    if use_accelerate is not None:
+        cfg.infra.use_accelerate = use_accelerate
 
 
 def _build_world_narrator(cfg: PersistentDiamondsConfig):
@@ -95,9 +122,15 @@ def _load_weights(path: Path):
 
 
 @app.command("init-config")
-def init_config(config_path: Path = Path("pdv3.yaml")):
-    cfg = _load_config(config_path)
+def init_config(
+    config_path: Path = Path("pdv3.yaml"),
+    preset: str | None = typer.Option(None, help=f"Size preset: {', '.join(PRESET_NAMES)}"),
+):
+    cfg = _load_config(config_path, preset=preset)
     typer.echo(f"Config ready: {config_path}")
+    if preset:
+        typer.echo(f"Preset: {preset}")
+    typer.echo(f"World latent_dim: {cfg.world_model.latent_dim}")
     typer.echo(f"Teacher model default: {cfg.distillation.teacher_model_name}")
 
 
@@ -134,8 +167,14 @@ def train_stage1(
     objective: str = "mixed",
     config_path: Path = Path("pdv3.yaml"),
     checkpoint_path: Path = Path("artifacts/world_stage1.pt"),
+    preset: str | None = typer.Option(None, help=f"Size preset: {', '.join(PRESET_NAMES)}"),
+    bf16: bool | None = typer.Option(None, help="Enable bfloat16 mixed precision"),
+    grad_accum: int | None = typer.Option(None, help="Gradient accumulation steps"),
+    activation_ckpt: bool | None = typer.Option(None, help="Enable activation checkpointing"),
+    use_accelerate: bool | None = typer.Option(None, help="Use HF Accelerate"),
 ):
-    cfg = _load_config(config_path)
+    cfg = _load_config(config_path, preset=preset)
+    _apply_infra_overrides(cfg, bf16=bf16, grad_accum=grad_accum, activation_ckpt=activation_ckpt, use_accelerate=use_accelerate)
     store = IQTObjectiveDataStore(cfg.data.cache_dir)
     data = store.materialize(
         ObjectiveRequest(
@@ -175,8 +214,14 @@ def train_stage2(
     config_path: Path = Path("pdv3.yaml"),
     world_checkpoint: Path | None = None,
     save_dir: Path = Path("artifacts"),
+    preset: str | None = typer.Option(None, help=f"Size preset: {', '.join(PRESET_NAMES)}"),
+    bf16: bool | None = typer.Option(None, help="Enable bfloat16 mixed precision"),
+    grad_accum: int | None = typer.Option(None, help="Gradient accumulation steps"),
+    activation_ckpt: bool | None = typer.Option(None, help="Enable activation checkpointing"),
+    use_accelerate: bool | None = typer.Option(None, help="Use HF Accelerate"),
 ):
-    cfg = _load_config(config_path)
+    cfg = _load_config(config_path, preset=preset)
+    _apply_infra_overrides(cfg, bf16=bf16, grad_accum=grad_accum, activation_ckpt=activation_ckpt, use_accelerate=use_accelerate)
     store = IQTObjectiveDataStore(cfg.data.cache_dir)
 
     data = store.materialize(
@@ -234,8 +279,14 @@ def train_distill(
     corpus_path: Path = Path("artifacts/distill/corpus.jsonl"),
     report_out: Path = Path("artifacts/report_head.pt"),
     use_cache: bool = True,
+    preset: str | None = typer.Option(None, help=f"Size preset: {', '.join(PRESET_NAMES)}"),
+    bf16: bool | None = typer.Option(None, help="Enable bfloat16 mixed precision"),
+    grad_accum: int | None = typer.Option(None, help="Gradient accumulation steps"),
+    activation_ckpt: bool | None = typer.Option(None, help="Enable activation checkpointing"),
+    use_accelerate: bool | None = typer.Option(None, help="Use HF Accelerate"),
 ):
-    cfg = _load_config(config_path)
+    cfg = _load_config(config_path, preset=preset)
+    _apply_infra_overrides(cfg, bf16=bf16, grad_accum=grad_accum, activation_ckpt=activation_ckpt, use_accelerate=use_accelerate)
     store = IQTObjectiveDataStore(cfg.data.cache_dir)
 
     if objective_data is None:
@@ -334,9 +385,15 @@ def train_stage4(
     world_checkpoint: Path | None = None,
     narrator_checkpoint: Path | None = None,
     save_dir: Path = Path("artifacts"),
+    preset: str | None = typer.Option(None, help=f"Size preset: {', '.join(PRESET_NAMES)}"),
+    bf16: bool | None = typer.Option(None, help="Enable bfloat16 mixed precision"),
+    grad_accum: int | None = typer.Option(None, help="Gradient accumulation steps"),
+    activation_ckpt: bool | None = typer.Option(None, help="Enable activation checkpointing"),
+    use_accelerate: bool | None = typer.Option(None, help="Use HF Accelerate"),
 ):
     """Stage 4: Embodied grounding via closed-loop gridworld interaction."""
-    cfg = _load_config(config_path)
+    cfg = _load_config(config_path, preset=preset)
+    _apply_infra_overrides(cfg, bf16=bf16, grad_accum=grad_accum, activation_ckpt=activation_ckpt, use_accelerate=use_accelerate)
     world, narrator = _build_world_narrator(cfg)
 
     if world_checkpoint and world_checkpoint.exists():
