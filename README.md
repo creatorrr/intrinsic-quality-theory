@@ -16,9 +16,9 @@ Start with the **[Gentle Introduction](./INTRODUCTION.md)** — a lay reader's g
 
 Consciousness is not produced by brains. It is what physical states are, from the inside.
 
-Every bounded region of spacetime has a complete physical description: the set of all observations you could make inside that region, paired with the actual values those observations would return. Physics calls this the *algebra-state pair*. IQT identifies this object with phenomenal quality. Not "gives rise to." Not "correlates with." The algebra-state pair and the qualitative character of experience are the same thing under two descriptions, the way "the morning star" and "the evening star" are both Venus.
+Every bounded region of spacetime has a complete physical description: the set of all observations you could make inside that region, paired with the actual values those observations would return. Physics calls this the *algebra-state pair*. IQT says this object is phenomenal quality. Not "gives rise to." Not "correlates with." The algebra-state pair and the qualitative character of experience are the same thing under two descriptions, the way "the morning star" and "the evening star" are both Venus.
 
-This is not arbitrary. If you ask what properties "the intrinsic nature of a physical region" must have, four independently motivated constraints converge on a single mathematical object. The algebra-state pair is the only candidate. The identification with consciousness is still a postulate — but it is a postulate on the only option available.
+This is not arbitrary. Ask what properties "the intrinsic nature of a physical region" must have, and four constraints, each motivated independently, pick out one mathematical object: the algebra-state pair. Nothing else qualifies. The identification with consciousness is a postulate, but it is a postulate on the only option available.
 
 ## Five things the theory says
 
@@ -36,7 +36,7 @@ The "so rocks are conscious?" objection conflates Levels 0 and 2. The Hard Probl
 
 Your visual cortex is a causal diamond (a bounded spacetime region). Your whole brain is a larger diamond containing it. A single neuron is a smaller one inside that. All three have quality simultaneously. The neuron's quality is simple. The whole brain's quality includes cross-regional correlations invisible to the neuron. Neither is "the real one."
 
-This is *perspectival relativity*. There is no correct level at which consciousness happens. Multiple overlapping regions bear quality at the same time. IQT calls this the **democracy of diamonds**, in contrast with IIT's exclusion postulate (which selects one maximally integrated region and declares the rest non-conscious).
+This is *perspectival relativity*. There is no correct level at which consciousness happens. Multiple overlapping regions bear quality at the same time. IQT calls this the **democracy of diamonds**. IIT's exclusion postulate, by contrast, selects one maximally integrated region and declares the rest non-conscious.
 
 **3. The shape of a spacetime region determines the character of its quality.**
 
@@ -46,9 +46,9 @@ The felt asymmetry between panoramic space and fleeting time follows from the di
 
 **4. The "flow" of time is what finite-bandwidth narration feels like.**
 
-The narrative operator — the system that compresses quality into a self-model and drives report — can only hold a thin temporal slice at once. Each update sheds trailing content and acquires leading content. That sequential shedding-and-acquiring is the phenomenology of passage. Time does not move. The narrator's window slides.
+The narrative operator (the system that compresses quality into a self-model and drives report) can only hold a thin temporal slice at once. Each update sheds trailing content and acquires leading content. That sequential shedding-and-acquiring is the phenomenology of passage. Time does not move. The narrator's window slides.
 
-An infinite-bandwidth narrator (a thought experiment, not a real system) would still run forward — computation at macroscopic scales is irreversible — but it would not feel time passing. It would hold its entire trajectory at once. The direction of time is constituted by thermodynamics. The *texture* of passage is constituted by finite bandwidth.
+An infinite-bandwidth narrator (a thought experiment, not a real system) would still run forward, since computation at macroscopic scales is irreversible, but it would not feel time passing. It would hold its entire trajectory at once. The direction of time is constituted by thermodynamics. The *texture* of passage is constituted by finite bandwidth.
 
 **5. Composition is correlation structure, not a binding force.**
 
@@ -65,15 +65,15 @@ Why the algebra-state pair and nothing else? Four requirements on "the intrinsic
 
 The algebra-state pair satisfies all four. Nothing else does. This is a mathematical result within algebraic quantum field theory (AQFT), not a philosophical preference.
 
-The Quality Identity (QI) — that this intrinsic nature *is* phenomenal quality — is a separate postulate. It is justified abductively: QI generates composition for free (Section 3), dissolves subject selection (Section 4.4), predicts temporal phenomenology from geometry (Section 2.6), and yields three pre-registerable experiments (Section 5). No other identification of quality with a mathematical object currently delivers comparable explanatory yield.
+The Quality Identity (QI), that this intrinsic nature *is* phenomenal quality, is a separate postulate. It is justified abductively: QI generates composition for free (Section 3), dissolves subject selection (Section 4.4), predicts temporal phenomenology from geometry (Section 2.6), and yields three pre-registerable experiments (Section 5). No other identification of quality with a mathematical object currently delivers as much from a single postulate.
 
 ## The effective-theory bridge
 
-The identity thesis is formulated in AQFT. Brains operate at scales roughly 35 orders of magnitude above the Planck length. The gap is bridged the same way particle physics bridges the gap between fundamental theory and detector readings: through effective field theory.
+The identity thesis is formulated in AQFT. Brains operate at scales roughly 35 orders of magnitude above the Planck length. The gap is bridged the way particle physics bridges the gap between fundamental theory and detector readings: through effective field theory.
 
-The fundamental algebra is coarse-grained to an effective neural algebra whose generators correspond to mesoscopic quantities — local field potentials, population firing rates, spatiotemporal correlations. The coarse-graining is constrained by physical locality (observables in one region cannot map to a different region), algebraic structure (the embedding preserves products and adjoints), and instrumentation (generators are fixed by what the electrodes physically access, not by what would make predictions come out right).
+The fundamental algebra is coarse-grained to an effective neural algebra whose generators correspond to mesoscopic quantities: local field potentials, population firing rates, spatiotemporal correlations. The coarse-graining is constrained by physical locality (observables in one region cannot map to a different region), algebraic structure (the embedding preserves products and adjoints), and instrumentation (generators are fixed by what the electrodes physically access, not by what would make predictions come out right).
 
-The effective algebra is still a local algebra. It satisfies isotony, approximate microcausality, and covariance. The full interpretive framework — perspectival relativity, composition via correlation, the identity thesis — carries over at neural scale. The EEG/iEEG metrics in the experimental protocols are computable functionals of a state on this algebra.
+The effective algebra is still a local algebra. It satisfies isotony, approximate microcausality, and covariance. The full interpretive framework (perspectival relativity, composition via correlation, the identity thesis) carries over at neural scale. The EEG/iEEG metrics in the experimental protocols are computable functionals of a state on this algebra.
 
 ## Three experimental protocols
 
@@ -89,7 +89,7 @@ The alternative (consistent with single-locus views like IIT or GNW): all module
 
 ### Protocol 2: Within-hemisphere overlapping parcellations
 
-This is the direct test of democracy versus exclusion. Two brain regions sharing physical substrate (lateral parietal cortex) each perform an independent cognitive task. Three converging lines of evidence:
+This is the direct test of democracy versus exclusion. Two brain regions sharing physical substrate (lateral parietal cortex) each perform an independent cognitive task. Three lines of evidence:
 
 - **Observational.** Both regions maintain high persistence independently; perturbations to one task do not propagate to the other.
 - **Synergy analysis.** The overlap zone does not create synergistic binding between the exclusive zones (tripartite O-information near zero or positive).
@@ -130,7 +130,7 @@ IQT treats GNW and higher-order theories as correct descriptions of Level 2 (how
 
 IQT is built in layers. You can reject a later layer while keeping earlier ones.
 
-**Reject QI (the identity of intrinsic nature with phenomenal quality).** The constraint argument still gives you a novel characterization of "intrinsic nature" in AQFT. The formalism of Sections 2–3 stands as a contribution to the metaphysics of local physics. You are a property dualist. The cost: you need separate mechanisms for composition, subject selection, and temporal phenomenology — three things QI handles with one postulate.
+**Reject QI (the identity of intrinsic nature with phenomenal quality).** The constraint argument still gives you a characterization of "intrinsic nature" in AQFT. The formalism of Sections 2–3 is a contribution to the metaphysics of local physics on its own. You are a property dualist. The cost: you need separate mechanisms for composition, subject selection, and temporal phenomenology, three things QI handles with one postulate.
 
 **Accept QI, reject democracy.** You accept that quality is the algebra-state pair but want an exclusion principle selecting one region per brain. You are doing IIT with a different ontology. Protocol 2 adjudicates.
 
@@ -140,7 +140,7 @@ IQT is built in layers. You can reject a later layer while keeping earlier ones.
 
 ## Status and open problems
 
-Draft v1.7.2. Mature enough for concrete experiments, with open problems across three fronts:
+Draft v1.7.2. The theory is ready for experimental testing. Open problems fall on three fronts:
 
 **Mathematical.** The boundary data problem (minimal composition datum). Presheaf cohomology on the poset of causal diamonds. Rigorous AQFT on causal sets.
 
