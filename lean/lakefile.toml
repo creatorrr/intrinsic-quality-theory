@@ -1,0 +1,11 @@
+name = "IQT"
+version = "0.1.0"
+defaultTargets = ["IQT"]
+
+[[lean_lib]]
+name = "IQT"
+
+[[require]]
+name = "PhysLean"
+git = "https://github.com/HEPLean/PhysLean.git"
+rev = "master"
