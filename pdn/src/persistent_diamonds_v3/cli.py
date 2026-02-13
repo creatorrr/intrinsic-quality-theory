@@ -7,7 +7,13 @@ import torch
 import typer
 
 from persistent_diamonds_v3.config import PersistentDiamondsConfig
-from persistent_diamonds_v3.data import IQTObjectiveDataStore, ObjectiveRequest, ObjectiveTensorDataset
+from persistent_diamonds_v3.data import (
+    CachedNarratorTextDataset,
+    IQTObjectiveDataStore,
+    ObjectiveRequest,
+    ObjectiveTensorDataset,
+    build_code_cache,
+)
 from persistent_diamonds_v3.evaluation import compute_iqt_bundle
 from persistent_diamonds_v3.evaluation.protocols import (
     result_to_dict,
@@ -225,6 +231,7 @@ def train_distill(
     narrator_checkpoint: Path | None = None,
     corpus_path: Path = Path("artifacts/distill/corpus.jsonl"),
     report_out: Path = Path("artifacts/report_head.pt"),
+    use_cache: bool = True,
 ):
     cfg = _load_config(config_path)
     store = IQTObjectiveDataStore(cfg.data.cache_dir)
@@ -258,14 +265,33 @@ def train_distill(
             "Adjusting report-head vocab size to match teacher tokenizer: "
             f"{cfg.report_head.vocab_size} -> {tokenizer_vocab}"
         )
-    dataset = NarratorTextDataset(
-        corpus_path=corpus_path,
-        objective_npz_path=objective_data,
-        world_model=world,
-        narrator=narrator,
-        tokenizer=tokenizer,
-        device=cfg.train.device,
-    )
+
+    if use_cache:
+        typer.echo("Building/loading code cache...")
+        cache_path = build_code_cache(
+            corpus_path=corpus_path,
+            objective_npz_path=objective_data,
+            world_model=world,
+            narrator=narrator,
+            cache_dir=cfg.distillation.code_cache_dir,
+            device=cfg.train.device,
+        )
+        typer.echo(f"Code cache: {cache_path}")
+        dataset = CachedNarratorTextDataset(
+            cache_path=cache_path,
+            corpus_path=corpus_path,
+            tokenizer=tokenizer,
+            max_text_length=256,
+        )
+    else:
+        dataset = NarratorTextDataset(
+            corpus_path=corpus_path,
+            objective_npz_path=objective_data,
+            world_model=world,
+            narrator=narrator,
+            tokenizer=tokenizer,
+            device=cfg.train.device,
+        )
 
     report_head = _build_report_head(cfg, vocab_size_override=tokenizer_vocab)
     trainer = DistillationTrainer(report_head, cfg.distillation, device=cfg.train.device)
@@ -279,9 +305,13 @@ def train_distill(
             {
                 "teacher_model": result.teacher_model_name,
                 "final_loss": result.final_loss,
+                "final_loss_kl": result.final_loss_kl,
+                "final_loss_ce": result.final_loss_ce,
+                "final_loss_hidden": result.final_loss_hidden,
                 "steps": result.steps,
                 "objective_data": str(objective_data),
                 "corpus": str(corpus_path),
+                "hidden_alignment": cfg.distillation.hidden_alignment,
             },
             indent=2,
         )
@@ -290,6 +320,8 @@ def train_distill(
     typer.echo(
         f"Stage 3 complete. loss={result.final_loss:.4f} teacher={result.teacher_model_name}"
     )
+    if cfg.distillation.hidden_alignment:
+        typer.echo(f"  KL={result.final_loss_kl:.4f} CE={result.final_loss_ce:.4f} hidden={result.final_loss_hidden:.4f}")
     typer.echo(f"Saved: {report_out}")
     typer.echo(f"Metadata: {metadata}")
 

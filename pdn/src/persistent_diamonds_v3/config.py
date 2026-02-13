@@ -72,6 +72,12 @@ class DistillationConfig:
     max_steps: int = 1000
     gradient_clip_norm: float = 1.0
     use_flash_attention_if_available: bool = True
+    # Intermediate-state hidden alignment
+    hidden_alignment: bool = False
+    alpha_hidden: float = 0.1
+    hidden_projection_dim: int = 256
+    # Cached narrator code-sequence path (skip recompute when set)
+    code_cache_dir: str = ".cache/pdv3/distill_codes"
 
 
 @dataclass(slots=True)

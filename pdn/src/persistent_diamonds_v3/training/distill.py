@@ -20,6 +20,9 @@ class DistillationResult:
     final_loss: float
     teacher_model_name: str
     steps: int
+    final_loss_kl: float = 0.0
+    final_loss_ce: float = 0.0
+    final_loss_hidden: float = 0.0
 
 
 def build_synthetic_distillation_corpus(
@@ -138,8 +141,24 @@ class DistillationTrainer:
         self.teacher_model, self.teacher_name = self._load_teacher(config)
         self.teacher_model.to(self.device).eval()
 
+        # Optional hidden-state alignment projection (teacher_dim -> student_dim)
+        self.hidden_projection: torch.nn.Linear | None = None
+        if config.hidden_alignment:
+            teacher_dim = self.teacher_model.config.hidden_size
+            student_dim = report_head.model_dim
+            proj_dim = config.hidden_projection_dim
+            self.hidden_projection = torch.nn.Sequential(
+                torch.nn.Linear(teacher_dim, proj_dim),
+                torch.nn.SiLU(),
+                torch.nn.Linear(proj_dim, student_dim),
+            ).to(self.device)
+
+        params = list(self.report_head.parameters())
+        if self.hidden_projection is not None:
+            params += list(self.hidden_projection.parameters())
+
         self.optimizer = torch.optim.AdamW(
-            self.report_head.parameters(),
+            params,
             lr=config.learning_rate,
             weight_decay=1e-2,
         )
@@ -168,7 +187,12 @@ class DistillationTrainer:
             raise ValueError("Distillation received an empty dataset.")
         loader = DataLoader(dataset, batch_size=self.config.batch_size, shuffle=True, drop_last=False)
         final_loss = 0.0
+        final_loss_kl = 0.0
+        final_loss_ce = 0.0
+        final_loss_hidden = 0.0
         steps = 0
+
+        use_hidden = self.config.hidden_alignment and self.hidden_projection is not None
 
         progress = tqdm(total=self.config.max_steps, desc="stage3-distill")
         while steps < self.config.max_steps:
@@ -181,10 +205,12 @@ class DistillationTrainer:
                 attention_mask = batch["attention_mask"].to(self.device)
 
                 with torch.no_grad():
-                    teacher_logits = self.teacher_model(
+                    teacher_out = self.teacher_model(
                         input_ids=input_ids,
                         attention_mask=attention_mask,
-                    ).logits
+                        output_hidden_states=use_hidden,
+                    )
+                    teacher_logits = teacher_out.logits
 
                 student_logits = self.report_head(
                     code_indices=code_indices,
@@ -211,12 +237,37 @@ class DistillationTrainer:
 
                 loss = self.config.alpha_kl * loss_kl + self.config.alpha_ce * loss_ce
 
+                # Optional intermediate hidden-state alignment
+                loss_hidden = torch.tensor(0.0, device=self.device)
+                if use_hidden:
+                    # Use the middle teacher hidden layer as the alignment target
+                    teacher_hidden_states = teacher_out.hidden_states
+                    mid_layer = len(teacher_hidden_states) // 2
+                    teacher_hidden = teacher_hidden_states[mid_layer].detach()
+                    projected = self.hidden_projection(teacher_hidden)
+
+                    # Get student decoder's internal representation via the code memory
+                    # Align on the shared sequence dimension (truncate to match)
+                    student_memory = self.report_head.code_embedding(code_indices).mean(dim=2)
+                    min_len = min(projected.size(1), student_memory.size(1))
+                    loss_hidden = F.mse_loss(
+                        student_memory[:, :min_len],
+                        projected[:, :min_len],
+                    )
+                    loss = loss + self.config.alpha_hidden * loss_hidden
+
                 self.optimizer.zero_grad(set_to_none=True)
                 loss.backward()
-                torch.nn.utils.clip_grad_norm_(self.report_head.parameters(), self.config.gradient_clip_norm)
+                clip_params = list(self.report_head.parameters())
+                if self.hidden_projection is not None:
+                    clip_params += list(self.hidden_projection.parameters())
+                torch.nn.utils.clip_grad_norm_(clip_params, self.config.gradient_clip_norm)
                 self.optimizer.step()
 
                 final_loss = float(loss.item())
+                final_loss_kl = float(loss_kl.item())
+                final_loss_ce = float(loss_ce.item())
+                final_loss_hidden = float(loss_hidden.item())
                 steps += 1
                 progress.update(1)
                 progress.set_postfix(loss=f"{final_loss:.4f}", teacher=self.teacher_name)
@@ -225,7 +276,14 @@ class DistillationTrainer:
                     break
 
         progress.close()
-        return DistillationResult(final_loss=final_loss, teacher_model_name=self.teacher_name, steps=steps)
+        return DistillationResult(
+            final_loss=final_loss,
+            teacher_model_name=self.teacher_name,
+            steps=steps,
+            final_loss_kl=final_loss_kl,
+            final_loss_ce=final_loss_ce,
+            final_loss_hidden=final_loss_hidden,
+        )
 
 
 def load_tokenizer(config: DistillationConfig):
