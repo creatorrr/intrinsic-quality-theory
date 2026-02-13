@@ -1,7 +1,7 @@
-# Phase 4b: Narrative Operator (Level 2 Report)
+# Phase 4b: Narrative Operator (Filter 2 Report)
 
 **Phase:** 04 - Self-Threads & Narrative Operator
-**Track:** Consciousness Levels
+**Track:** Consciousness Filters
 **Depends on:** 04a (self-threads)
 **Unlocks:** 05b (metric formalization)
 
@@ -9,7 +9,7 @@
 
 ## Goal
 
-Formalize the narrative operator N from Section 4.5: the Level 2 structure that bridges self-thread quality to reportable experience. N compresses a quality trajectory into a self-model that controls a readout channel.
+Formalize the narrative operator N from Section 4.5: the Filter 2 structure that bridges self-thread quality to reportable experience. N compresses a quality trajectory into a self-model that controls a readout channel.
 
 **Caveat:** The paper explicitly says N is "the weakest link" and "a schema, not a model." The formalization here captures the type-level structure, not a biophysically realistic implementation.
 
@@ -73,8 +73,8 @@ structure NarrativeOperator (Reg : Type) [Preorder Reg] (N : LocalNet Reg)
   compress : (thread.time → StateSpace N (thread.diamond ·)) → SelfModel
   -- Report coupling strength
   readout_dominance : ℝ
-  -- Level 2 threshold: readout dominance must exceed a threshold
-  is_level2 : readout_dominance > readout_threshold
+  -- Filter 2 threshold: readout dominance must exceed a threshold
+  is_filter2 : readout_dominance > readout_threshold
 ```
 
 ### 3. Readout Dominance
@@ -82,16 +82,16 @@ structure NarrativeOperator (Reg : Type) [Preorder Reg] (N : LocalNet Reg)
 ```lean
 /-- Readout dominance R: directed information from the self-model to motor output.
     R = DI(self-model → motor).
-    Level 2 (Report) requires R > R_threshold. -/
+    Filter 2 (Report) requires R > R_threshold. -/
 def readoutDominance (narr : NarrativeOperator Reg N ω) : ℝ :=
   narr.readout_dominance
 
-/-- A self-thread is Level 2 iff it has a narrative operator with sufficient
+/-- A self-thread is Filter 2 iff it has a narrative operator with sufficient
     readout dominance. -/
 def hasReport (N' : LocalNet Reg) (ω : CompatibleFamily N')
     (chain : TemporalChain Reg) : Prop :=
   ∃ narr : NarrativeOperator Reg N' ω,
-    narr.thread.toTemporalChain = chain ∧ narr.is_level2
+    narr.thread.toTemporalChain = chain ∧ narr.is_filter2
 ```
 
 ### 4. Formal Properties (Section 4.5)
@@ -112,7 +112,7 @@ def hasReport (N' : LocalNet Reg) (ω : CompatibleFamily N')
 ### 5. Role Constraint
 
 ```lean
-/-- N is a Level 2 (report) construction: it does NOT manufacture Level 1 experience.
+/-- N is a Filter 2 (report) construction: it does NOT manufacture Filter 1 experience.
     It compresses, tracks, and routes an already-existing self-thread's quality
     trajectory into a form usable for prediction, control, and report. -/
 -- This is a definitional constraint: NarrativeOperator requires a SelfThread
@@ -124,7 +124,7 @@ def hasReport (N' : LocalNet Reg) (ω : CompatibleFamily N')
 - [ ] `NarrativeOperator` structure compiles
 - [ ] Five-step pipeline types are sketched (even with `sorry`)
 - [ ] `readoutDominance` and `hasReport` compile
-- [ ] The Level 0/1/2 hierarchy is complete: `quality_universal` (Phase 03c), `hasExperience` (Phase 04a), `hasReport` (Phase 04b)
+- [ ] The Filter 0/1/2 hierarchy is complete: `quality_universal` (Phase 03c), `hasExperience` (Phase 04a), `hasReport` (Phase 04b)
 - [ ] Role constraint documented: N requires pre-existing self-thread
 
 ## Notes

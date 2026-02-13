@@ -2,7 +2,7 @@
 
 A Geometric Theory of Phenomenal Experience
 
-Draft v1.7.2 | February 2026 | Diwank Singh Tomer
+Draft v1.8 | February 2026 | Diwank Singh Tomer
 
 ---
 
@@ -24,19 +24,19 @@ This is not arbitrary. Ask what properties "the intrinsic nature of a physical r
 
 **1. Quality is universal. Experience and selfhood are not.**
 
-IQT separates three levels:
+IQT applies three filters to a single substrate (quality):
 
-- **Level 0 — Quality.** The intrinsic state of any bounded spacetime region. Everything has it. A rock has quality the way everything has a temperature; that does not make it hot.
-- **Level 1 — Experience.** A quality-stream that persists over time and is causally semi-autonomous (its future depends partly on its own past, not just on outside forces). A mouse has this. A thermostat does not.
-- **Level 2 — Report.** A self-thread that builds a compressed self-model and controls a readout channel. This is the "I" that can say "I see red." Humans have this. Mice probably do not.
+- **Filter 0 — Quality (universal).** The intrinsic state of any bounded spacetime region. Everything has it. A rock has quality the way everything has a temperature; that does not make it hot.
+- **Filter 1 — Persistence (self-maintenance + invariance).** Selects quality that is self-maintaining and dynamically invariant. A mouse has this. A thermostat does not.
+- **Filter 2 — Narration (finite bandwidth + causal asymmetry + compression).** Selects quality that includes a sub-structure performing finite-bandwidth compression, generating a self-model. This is the "I" that can say "I see red." Humans have this. Mice probably do not.
 
-The "so rocks are conscious?" objection conflates Levels 0 and 2. The Hard Problem is dissolved at Level 0 by the identity thesis. The interesting scientific questions live at Levels 1 and 2, and those are empirical.
+The "so rocks are conscious?" objection conflates Filter 0 with Filter 2. The Hard Problem is dissolved at Filter 0 by the identity thesis. The interesting scientific questions live at Filters 1 and 2, and those are empirical.
 
 **2. Every bounded region has quality. No region is privileged.**
 
 Your visual cortex is a causal diamond (a bounded spacetime region). Your whole brain is a larger diamond containing it. A single neuron is a smaller one inside that. All three have quality simultaneously. The neuron's quality is simple. The whole brain's quality includes cross-regional correlations invisible to the neuron. Neither is "the real one."
 
-This is *perspectival relativity*. There is no correct level at which consciousness happens. Multiple overlapping regions bear quality at the same time. IQT calls this the **democracy of diamonds**. IIT's exclusion postulate, by contrast, selects one maximally integrated region and declares the rest non-conscious.
+This is *perspectival relativity*. There is no correct level at which quality becomes consciousness. Multiple overlapping regions bear quality at the same time. IQT calls this the **democracy of diamonds**. IIT's exclusion postulate, by contrast, selects one maximally integrated region and declares the rest non-conscious.
 
 **3. The shape of a spacetime region determines the character of its quality.**
 
@@ -124,7 +124,7 @@ Neither IIT nor GNW generates multi-scale temporal structure predictions in this
 
 The primary axis of divergence from IIT is overlap. Protocol 2 targets this directly.
 
-IQT treats GNW and higher-order theories as correct descriptions of Level 2 (how the narrative self works, how report happens) but silent about Levels 0 and 1. The global workspace is the readout mechanism, not the source of quality.
+IQT treats GNW and higher-order theories as correct descriptions of Filter 2/3 (how the narrative self works, how report happens) but silent about Filter 0 and Filter 1. The global workspace is the readout mechanism, not the source of quality.
 
 ## Where to disagree
 
@@ -140,7 +140,7 @@ IQT is built in layers. You can reject a later layer while keeping earlier ones.
 
 ## Status and open problems
 
-Draft v1.7.2. The theory is ready for experimental testing. Open problems fall on three fronts:
+Draft v1.8. The theory is ready for experimental testing. Open problems fall on three fronts:
 
 **Mathematical.** The boundary data problem (minimal composition datum). Presheaf cohomology on the poset of causal diamonds. Rigorous AQFT on causal sets.
 
@@ -152,12 +152,12 @@ Collaboration sought with clinical anesthesiology, epilepsy surgery, and psyched
 
 ## Reading the paper
 
-The full paper is [`iqt.md`](./iqt.md) (v1.7.2). The earlier v1.6.0 draft is archived in [`v1.6.0/`](./v1.6.0/).
+The full paper is [`iqt.md`](./iqt.md) (v1.8).
 
 Three reading paths:
 
 - **Philosophers.** Section 1 (core thesis, constraint argument) → Section 4 (subject selection, phenomenological puzzles) → Section 6 (Russellian monism, IIT, process philosophy).
-- **Neuroscientists.** Section 5 (protocols, metrics) → Section 2.6 (effective-theory bridge) → Section 4 (levels of consciousness, split-brain predictions).
+- **Neuroscientists.** Section 5 (protocols, metrics) → Section 2.6 (effective-theory bridge) → Section 4 (filters on quality, split-brain predictions).
 - **Physicists / mathematicians.** Sections 1–3 sequentially (formal architecture) → Section 5 (empirical grounding) → Section 7 (open mathematical problems).
 
 ## License

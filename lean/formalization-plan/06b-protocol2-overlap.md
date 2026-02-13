@@ -94,7 +94,7 @@ def failure_condition_protocol2
 ### 5. Connection to Democracy of Diamonds
 
 ```lean
-/-- Protocol 2 directly tests perspectival relativity (Phase 03c) at Level 1.
+/-- Protocol 2 directly tests perspectival relativity (Phase 03c) at Filter 1.
     If both overlapping regions sustain independent self-threads (Phase 04a)
     with low cross-propagation, this is evidence for democracy over exclusion. -/
 -- Success: two overlapping SelfThreads coexist, each causally semi-autonomous.
