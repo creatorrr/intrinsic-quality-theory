@@ -3,7 +3,7 @@
 **Version:** 1.0
 **Date:** February 2026
 **Target:** Lean 4.27.0 + Mathlib + PhysLean
-**Source Theory:** IQT v1.8 (iqt.md)
+**Source Theory:** IQT v1.8.1 (iqt.md)
 
 ---
 

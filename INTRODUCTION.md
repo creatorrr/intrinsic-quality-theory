@@ -1,6 +1,6 @@
 # A Gentle Introduction to Intrinsic Quality Theory
 
-*A lay reader's guide to "Intrinsic Quality Theory: A Geometric Theory of Phenomenal Experience" (Draft v1.8, February 2026) by Diwank Singh Tomer.*
+*A lay reader's guide to "Intrinsic Quality Theory: A Geometric Theory of Phenomenal Experience" (Draft v1.8.1, February 2026) by Diwank Singh Tomer.*
 
 *This introduction covers the core ideas without the math. For the full formal treatment, mathematical proofs, and complete experimental specifications, see the [full paper](./iqt.md). This guide is no substitute for the real thing.*
 
