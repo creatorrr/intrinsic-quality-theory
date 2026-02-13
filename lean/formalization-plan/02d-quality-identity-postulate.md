@@ -55,14 +55,14 @@ The paper insists on separating what is proved from what is postulated:
 -- (This is the axiom above)
 
 /-- What QI does NOT prove: that consciousness exists, or that any specific system
-    is conscious. Those are Level 1/2 questions addressed in Phase 04. -/
+    is conscious. Those are Filter 1/2 questions addressed in Phase 04. -/
 ```
 
 ## Acceptance Criteria
 
 - [ ] QI is stated as an axiom or opaque structure, clearly separated from theorems
 - [ ] The logical independence of QI from the convergence theorems is documented
-- [ ] The three-level distinction (Level 0: Quality, Level 1: Experience, Level 2: Report) is sketched as types or propositions
+- [ ] The three-filter distinction (Filter 0: Quality, Filter 1: Experience, Filter 2: Report) is sketched as types or propositions
 
 ## Notes
 
