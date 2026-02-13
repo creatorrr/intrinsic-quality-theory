@@ -114,6 +114,19 @@ class TrainConfig:
 
 
 @dataclass(slots=True)
+class InfraConfig:
+    """Training infrastructure switches for scaling beyond toy runs."""
+
+    bf16: bool = False
+    gradient_accumulation_steps: int = 1
+    activation_checkpointing: bool = False
+    use_accelerate: bool = False
+
+
+PRESET_NAMES = ("small", "medium", "large")
+
+
+@dataclass(slots=True)
 class PersistentDiamondsConfig:
     world_model: WorldModelConfig = field(default_factory=WorldModelConfig)
     narrator: NarratorConfig = field(default_factory=NarratorConfig)
@@ -124,6 +137,55 @@ class PersistentDiamondsConfig:
     stage4: Stage4Config = field(default_factory=Stage4Config)
     data: DataConfig = field(default_factory=DataConfig)
     train: TrainConfig = field(default_factory=TrainConfig)
+    infra: InfraConfig = field(default_factory=InfraConfig)
+
+    @classmethod
+    def from_preset(cls, name: str) -> "PersistentDiamondsConfig":
+        """Create a configuration from a named preset (small/medium/large)."""
+        if name not in PRESET_NAMES:
+            raise ValueError(f"Unknown preset {name!r}. Choose from {PRESET_NAMES}.")
+        if name == "small":
+            return cls(
+                world_model=WorldModelConfig(
+                    latent_dim=256, input_dim=64, module_count=4,
+                    overlap_ratio=0.25, hidden_dim=128,
+                ),
+                narrator=NarratorConfig(
+                    window_size=10, update_hz=10, world_step_hz=100,
+                    hidden_dim=128, codebook_size=256, codes_per_step=4, code_dim=32,
+                ),
+                control_head=ControlHeadConfig(action_dim=16, hidden_dim=64),
+                report_head=ReportHeadConfig(
+                    vocab_size=32000, model_dim=128, layer_count=2,
+                    head_count=4, ff_dim=512, max_seq_len=512,
+                ),
+                data=DataConfig(
+                    default_num_sequences=128, default_sequence_length=64, feature_dim=64,
+                ),
+                train=TrainConfig(max_steps=1000),
+            )
+        if name == "medium":
+            return cls(
+                world_model=WorldModelConfig(
+                    latent_dim=1024, input_dim=128, module_count=6,
+                    overlap_ratio=0.25, hidden_dim=512,
+                ),
+                narrator=NarratorConfig(
+                    window_size=10, update_hz=10, world_step_hz=100,
+                    hidden_dim=256, codebook_size=512, codes_per_step=8, code_dim=32,
+                ),
+                control_head=ControlHeadConfig(action_dim=16, hidden_dim=128),
+                report_head=ReportHeadConfig(
+                    vocab_size=32000, model_dim=256, layer_count=4,
+                    head_count=4, ff_dim=1024, max_seq_len=1024,
+                ),
+                data=DataConfig(
+                    default_num_sequences=256, default_sequence_length=128, feature_dim=128,
+                ),
+                train=TrainConfig(max_steps=5000),
+            )
+        # large: doc-reference defaults
+        return cls()
 
     @classmethod
     def from_yaml(cls, path: str | Path) -> "PersistentDiamondsConfig":
@@ -138,6 +200,7 @@ class PersistentDiamondsConfig:
             stage4=Stage4Config(**raw.get("stage4", {})),
             data=DataConfig(**raw.get("data", {})),
             train=TrainConfig(**raw.get("train", {})),
+            infra=InfraConfig(**raw.get("infra", {})),
         )
 
     def to_dict(self) -> dict[str, Any]:
