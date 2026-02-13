@@ -2,7 +2,7 @@
 
 A Geometric Theory of Phenomenal Experience
 
-Draft v1.7.1 | February 2026 | Diwank Singh Tomer
+Draft v1.7.2 | February 2026 | Diwank Singh Tomer
 
 ---
 
@@ -140,7 +140,7 @@ IQT is built in layers. You can reject a later layer while keeping earlier ones.
 
 ## Status and open problems
 
-Draft v1.7.1. Mature enough for concrete experiments, with open problems across three fronts:
+Draft v1.7.2. Mature enough for concrete experiments, with open problems across three fronts:
 
 **Mathematical.** The boundary data problem (minimal composition datum). Presheaf cohomology on the poset of causal diamonds. Rigorous AQFT on causal sets.
 
@@ -152,7 +152,7 @@ Collaboration sought with clinical anesthesiology, epilepsy surgery, and psyched
 
 ## Reading the paper
 
-The full paper is [`iqt_v1_6_0.docx`](./iqt_v1_6_0.docx).
+The full paper is [`iqt.md`](./iqt.md) (v1.7.2). The earlier v1.6.0 draft is archived in [`v1.6.0/`](./v1.6.0/).
 
 Three reading paths:
 
