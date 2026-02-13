@@ -1,6 +1,6 @@
 # A Gentle Introduction to Intrinsic Quality Theory
 
-*A lay reader's guide to "Intrinsic Quality Theory: A Geometric Theory of Phenomenal Experience" (Draft v1.8, February 2026) by Diwank Singh Tomer.*
+*A lay reader's guide to "Intrinsic Quality Theory: A Geometric Theory of Phenomenal Experience" (Draft v1.8.1, February 2026) by Diwank Singh Tomer.*
 
 *This introduction covers the core ideas without the math. For the full formal treatment, mathematical proofs, and complete experimental specifications, see the [full paper](./iqt.md). This guide is no substitute for the real thing.*
 
@@ -8,11 +8,13 @@
 
 ## What is this paper about?
 
-Psilocybin stretches your sense of time. Ketamine shatters it into fragments. DMT dissolves it entirely. These aren't trip reports. They are quantitative predictions, derived from geometry, made by a new theory of consciousness. The theory says that these substances physically reshape the spacetime region over which your brain integrates information, and that the *felt change in temporal experience* follows from that reshaping as a mathematical consequence.
+Anesthesia can erase experience. Split-brain surgery can fracture it. Brain stimulation can perturb it. And certain compounds can radically reshape the felt structure of time.
 
-That theory is **Intrinsic Quality Theory (IQT)**. It is an attempt to solve the **Hard Problem of Consciousness**: how does the physical matter inside your skull generate the invisible, private feeling of *having an experience*? Why does seeing red *feel* like something? You could build a perfect robot that detects wavelengths and says "that's red," but there would be nobody home. No felt redness. Where does that come from?
+**Intrinsic Quality Theory (IQT)** claims these are not disconnected curiosities. They are predictable consequences of a single geometric fact: the shape of the bounded spacetime region over which your brain integrates information.
 
-Science has traditionally assumed the brain *produces* consciousness, the way a stomach produces digestion. IQT says this is the wrong framing. It proposes a different starting point, and then backs it up with three concrete laboratory experiments, each with pre-specified conditions under which the theory would be considered wrong.
+IQT is an attempt to solve the **Hard Problem of Consciousness**: how does the physical matter inside your skull generate the invisible, private feeling of *having an experience*? Why does seeing red *feel* like something? You could build a perfect robot that detects wavelengths and says "that's red," but there would be nobody home. No felt redness. Where does that come from?
+
+IQT's answer is an identity thesis: the intrinsic physical state of a bounded region *is* its phenomenal quality. The payoff is that this identity yields concrete, pre-registerable experiments with explicit failure conditions. The theory proposes three laboratory protocols, each targeting a different structural prediction, each with pre-specified conditions under which the theory would be considered wrong.
 
 ---
 
@@ -87,6 +89,10 @@ IQT says consciousness works this way. A neuron's quality doesn't include inform
 
 The implication goes further: overlapping regions can all bear quality simultaneously. The region covering your visual cortex plus your auditory cortex has its own quality. So does just your visual cortex. So does your auditory cortex plus your prefrontal cortex. They overlap, and they are all real. IQT calls this the **democracy of diamonds** — every causally bounded region gets a vote.
 
+A consequence of this is **locus-dependence**: quality is defined for a bounded region (a diamond), and there is no "view from nowhere." Any measurement is a *physical coupling* that enlarges or reshapes the relevant region, changing the effective algebra. "Brain-only" and "brain+instrument" have genuinely different qualities because they are different diamonds.
+
+This has a concrete empirical payoff. Two instruments aimed at the "same" brain condition (e.g., EEG vs fMRI) are, in IQT terms, probing two different effective diamonds. Partial disagreement between their consciousness markers is not automatically noise. IQT predicts that the *pattern* of disagreement is geometry-dependent: modalities that trade temporal for spatial resolution should disagree most when temporal and spatial structure are dissociated, precisely the regimes targeted by the temporal-integration and perturbational protocols.
+
 This means the question "how many conscious beings are in a brain?" is, for IQT, ill-posed — like asking "how many shapes are in a cloud?" There are many overlapping regions, each with quality. Some pass Filter 1 (persistence). Some of those pass Filter 2 (narration). Normally, the dominant self-threads in your brain are so tightly correlated that the narrative operator builds a unified self-model: the feeling of being a single "I." But this unity is a product of correlation, not a metaphysical given. Cut the correlations, as happens in split-brain surgery, and the unity comes apart, even if the narrator keeps reporting it (more on this below).
 
 ### 3. The Shape of Spacetime = The Shape of Experience
@@ -119,7 +125,7 @@ IQT's answer has two parts, and it helps to take them one at a time.
 
 Now consider a thought experiment that sharpens the claim. Imagine a hypothetical narrator with *infinite* bandwidth, one that could hold its entire history at once rather than just a thin slice. (No real system could do this; it's a thought experiment.) Such a narrator would still run forward, because computation at macroscopic scales is irreversible and entropy increases. But it would not *feel* time passing. It would hold its entire trajectory simultaneously, the way you can hold an entire melody in memory after hearing it. There would be no sense of "now" sliding along, because nothing would be dropping off the trailing edge.
 
-This is the distinction IQT draws: the *direction* of time is constituted by thermodynamics (entropy increases, so there's an arrow). But the *texture* of passage, the feeling that moments are slipping away and that "now" is always being replaced, is constituted by finite bandwidth. Change the bandwidth, and you change the feeling. The psychedelic predictions in the previous section test exactly this.
+This is the distinction IQT draws: the *direction* of time is constituted by thermodynamics (entropy increases, so there's an arrow). But the *texture* of passage, the feeling that moments are slipping away and that "now" is always being replaced, is constituted by finite bandwidth. Change the bandwidth, and you change the feeling. The temporal-integration predictions in the previous section test exactly this.
 
 ### 5. The Composition Problem: What's the "Glue"?
 
@@ -219,21 +225,23 @@ A theory that can't be tested is just philosophy. IQT proposes three experiments
 
 **What would disprove IQT:** If electrical stimulation in one region uniformly propagates to the other, or if persistence metrics show the two regions can't operate independently.
 
-### Protocol 3: The Psychedelics Test
+### Protocol 3: Temporal Integration Modulation
 
-**The question:** Do psychedelic substances change the temporal "shape" of consciousness in the specific way IQT's geometry predicts?
+**The question:** Do interventions that alter temporal integration change the "shape" of consciousness in the specific way IQT's geometry predicts?
 
-**IQT predicts:** The peak of the brain's multi-scale persistence curve (a measurable signal reflecting the temporal integration window) should shift in a specific direction for each substance:
+**IQT predicts:** The peak of the brain's multi-scale persistence curve (a measurable signal reflecting the temporal integration window) should shift in a specific direction for each intervention. The pharmacological arm tests four substances:
 - **Psilocybin** → peak shifts toward longer timescales (expanded present, time dilation)
 - **Ketamine** → peak shifts toward shorter timescales (fragmented time)
 - **DMT** → the curve flattens (no preferred timescale, time dissolves)
 - **Midazolam** (a non-psychedelic sedative, used as active control). Curve scales down uniformly without shifting the peak, separating arousal effects from changes in temporal integration.
 
+Beyond pharmacology, the same geometric quantities can be pushed (or read out) with perturbation and clinical stimulation. TMS-EEG provides causal perturbation of the effective temporal window (Casali et al., 2013). Intracranial stimulation during epilepsy monitoring offers precise local perturbation within standard clinical safety constraints. And disconnection cases such as split brain amount to structural removal of cross-boundary correlators. These are not separate theories. They are different arms of the same test: whether reshaping the effective diamond reshapes temporal experience in the direction the geometry predicts.
+
 **The rival predictions:**
 - *IIT* doesn't have a mechanism for temporal phenomenology. It characterizes cause-effect structure at a moment but doesn't predict how the shape of temporal integration should *feel*.
 - *GNW* explains temporal experience through workspace dynamics (contents enter and leave the global broadcast) but this is a functional description, not a structural account of why it feels like passage.
 
-**What would disprove IQT:** If the peak position doesn't differ across substances, or shows no correlation with subjects' reported temporal experience.
+**What would disprove IQT:** If the peak position doesn't differ across interventions, or shows no correlation with subjects' reported temporal experience.
 
 ---
 
