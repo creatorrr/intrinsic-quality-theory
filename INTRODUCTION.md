@@ -4,7 +4,7 @@
 
 *This introduction covers the core ideas without the math. For the full formal treatment, mathematical proofs, and complete experimental specifications, see the [full paper](./iqt.md). This guide is no substitute for the real thing.*
 
-<video src="images/Intrinsic_Quality_Theory.mp4" controls width="100%"></video>
+<video src="https://github.com/creatorrr/intrinsic-quality-theory/raw/main/images/Intrinsic_Quality_Theory.mp4" controls width="100%"></video>
 
 -----
 
