@@ -6,11 +6,9 @@
 
 ---
 
-## What is this paper about?
-
-Anesthesia can erase experience. Split-brain surgery can fracture it. Brain stimulation can perturb it. And certain compounds can radically reshape the felt structure of time.
-
 ## Why This Problem Won't Go Away
+
+Anesthesia can erase experience. Split-brain surgery can fracture it. Brain stimulation can perturb it. And certain compounds can radically reshape the felt structure of time. These are clues. But clues to what?
 
 Look at something. Anything in front of you right now. Notice the experience of seeing it.
 
