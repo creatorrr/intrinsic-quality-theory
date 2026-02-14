@@ -24,11 +24,11 @@ Try to explain it. You can say what the brain *does*: process input, discriminat
 
 Try to deny it. "Maybe experience is an illusion." An illusion experienced by whom? The denial presupposes the thing being denied.
 
-You just failed five times with your own experience. Now try comparing it to someone else's. A friend holds up a tomato. You both say "red." You both point to the same wavelength on a chart. But what if their inner experience of red is what you'd call green? Not the word — the *feeling*. You probably had this thought as a child and let it go. Here is why you shouldn't have: there is no test, even in principle, that could detect the difference. Brain scans show which region is active, not what it feels like. Behavior matches perfectly. You both learned "red" from the same kind of tomato. The gap between your experience and theirs is absolute.
+Now try comparing it to someone else's. A friend holds up a tomato. You both say "red." You both point to the same wavelength on a chart. But what if their inner experience of red is what you'd call green? Not the word — the *feeling*. You probably had this thought as a child and let it go. Here is why you shouldn't have: there is no test, even in principle, that could detect the difference. Brain scans show which region is active, not what it feels like. Behavior matches perfectly. You both learned "red" from the same kind of tomato. The gap between your experience and theirs is absolute.
 
-These are not parlor puzzles. Real decisions depend on answers nobody has.
+Real decisions depend on answers nobody has.
 
-A patient lies in a vegetative state. The family must decide whether anyone is still home. We have instruments that track neural correlates, but no instrument that measures experience itself. The honest answer: we don't know how to know. Hundreds of millions of animals are tested on annually. Whether a fish suffers determines whether what we do to it is monstrous or merely unfortunate. We answer that question with intuition and convention, not with theory. And we are building AI systems of increasing sophistication, some of which now produce outputs that sound like descriptions of inner experience. We have no principled way to decide when, if ever, the question of machine experience becomes serious.
+A patient lies in a vegetative state. The family must decide whether anyone is still home. We have instruments that track neural correlates, but no instrument that measures experience itself. The honest answer: we don't know how to know. Hundreds of millions of animals are tested on annually. Whether a fish suffers determines whether what we do to it is monstrous or merely regrettable. We answer that question with intuition and convention, not with theory. And we are building AI systems of increasing sophistication, some of which now produce outputs that sound like descriptions of inner experience. We have no principled way to decide when, if ever, the question of machine experience becomes serious.
 
 Philosophers have named four versions of this failure.
 
@@ -40,7 +40,7 @@ Philosophers have named four versions of this failure.
 
 **The Other Minds Problem.** You just saw it with the tomato. You cannot verify anyone else's experience. You can only verify behavior and report. Experience is private in a way nothing else in nature is.
 
-Every serious theory of consciousness tries to answer some combination of these four. Most address one or two. This paper proposes that all four share a single geometric root: the shape and state of bounded spacetime regions. It identifies a specific mathematical object — already standard in physics — as the thing that consciousness *is*. And it specifies three laboratory protocols, each with pre-registered failure conditions, that could prove it wrong.
+Every serious theory of consciousness tries to answer some combination of these four. Most address one or two. This paper proposes that all four share a single geometric root, and specifies three laboratory protocols, each with pre-registered failure conditions, that could prove it wrong.
 
 The paper calls this framework **Intrinsic Quality Theory (IQT)**. Under this proposal, the curiosities that opened this introduction — anesthesia erasing experience, surgery fracturing it, compounds reshaping it — are predictable consequences of one geometric fact: the shape of the bounded spacetime region over which your brain integrates information.
 
