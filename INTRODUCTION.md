@@ -10,11 +10,39 @@
 
 Anesthesia can erase experience. Split-brain surgery can fracture it. Brain stimulation can perturb it. And certain compounds can radically reshape the felt structure of time.
 
-**Intrinsic Quality Theory (IQT)** claims these are not disconnected curiosities. They are predictable consequences of a single geometric fact: the shape of the bounded spacetime region over which your brain integrates information.
+## Why This Problem Won't Go Away
 
-IQT is an attempt to solve the **Hard Problem of Consciousness**: how does the physical matter inside your skull generate the invisible, private feeling of *having an experience*? Why does seeing red *feel* like something? You could build a perfect robot that detects wavelengths and says "that's red," but there would be nobody home. No felt redness. Where does that come from?
+Look at something. Anything in front of you right now. Notice the experience of seeing it.
 
-IQT's answer is an identity thesis: the intrinsic physical state of a bounded region *is* its phenomenal quality. The payoff is that this identity yields concrete, pre-registerable experiments with explicit failure conditions. The theory proposes three laboratory protocols, each targeting a different structural prediction, each with pre-specified conditions under which the theory would be considered wrong.
+Now define that experience. Not the object — the *experience*. Not "red" or "bright" or "sharp." The thing that is happening to you right now, the thing you are more certain of than anything else in the universe. Try to say what it is without using a word that just means the same thing. "It's awareness." What's awareness? "It's… experience." You're going in circles.
+
+Try to locate it. Where is it? Behind your eyes? Somewhere in your skull? Point to it the way you'd point to your left knee. You can't. It has no address.
+
+Try to measure it. Pick up any instrument: an EEG, an fMRI, a thermometer. Every instrument measures something physical. Voltage. Blood flow. Temperature. The experience *of* the physical is what you're trying to capture. The ruler is the thing being measured.
+
+Try to explain it. You can say what the brain *does*: process input, discriminate wavelengths, fire neurons. A camera does those things too. Nobody's home inside a camera. Why is someone home inside you?
+
+Try to deny it. "Maybe experience is an illusion." An illusion experienced by whom? The denial presupposes the thing being denied.
+
+You just failed five times with your own experience. Now try comparing it to someone else's. A friend holds up a tomato. You both say "red." You both point to the same wavelength on a chart. But what if their inner experience of red is what you'd call green? Not the word — the *feeling*. You probably had this thought as a child and let it go. Here is why you shouldn't have: there is no test, even in principle, that could detect the difference. Brain scans show which region is active, not what it feels like. Behavior matches perfectly. You both learned "red" from the same kind of tomato. The gap between your experience and theirs is absolute.
+
+These are not parlor puzzles. Real decisions depend on answers nobody has.
+
+A patient lies in a vegetative state. The family must decide whether anyone is still home. We have instruments that track neural correlates, but no instrument that measures experience itself. The honest answer: we don't know how to know. Hundreds of millions of animals are tested on annually. Whether a fish suffers determines whether what we do to it is monstrous or merely unfortunate. We answer that question with intuition and convention, not with theory. And we are building AI systems of increasing sophistication, some of which now produce outputs that sound like descriptions of inner experience. We have no principled way to decide when, if ever, the question of machine experience becomes serious.
+
+Philosophers have named four versions of this failure.
+
+**The Hard Problem.** Why does any physical process *feel like something at all*? You can explain everything a brain does — discrimination, integration, control, report — and still not have explained why doing all that is accompanied by experience.
+
+**The Combination Problem.** Your brain is made of neurons. Each neuron has no experience on its own, or at most something vanishingly simple. How do billions of simple things combine into one unified panoramic experience?
+
+**The Subject Selection Problem.** Your brain has billions of neurons, thousands of functional regions, countless possible subsystems. Which one is *you*? What picks out the boundary of the one that's conscious?
+
+**The Other Minds Problem.** You just saw it with the tomato. You cannot verify anyone else's experience. You can only verify behavior and report. Experience is private in a way nothing else in nature is.
+
+Every serious theory of consciousness tries to answer some combination of these four. Most address one or two. This paper proposes that all four share a single geometric root: the shape and state of bounded spacetime regions. It identifies a specific mathematical object — already standard in physics — as the thing that consciousness *is*. And it specifies three laboratory protocols, each with pre-registered failure conditions, that could prove it wrong.
+
+The paper calls this framework **Intrinsic Quality Theory (IQT)**. Under this proposal, the curiosities that opened this introduction — anesthesia erasing experience, surgery fracturing it, compounds reshaping it — are predictable consequences of one geometric fact: the shape of the bounded spacetime region over which your brain integrates information.
 
 ---
 
