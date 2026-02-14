@@ -4,6 +4,10 @@ A Geometric Theory of Phenomenal Experience
 
 Draft v1.8.1 | February 2026 | Diwank Singh Tomer
 
+<video src="images/Intrinsic_Quality_Theory.mp4" controls width="100%"></video>
+
+[NotebookLM](https://notebooklm.google.com/notebook/119e14f2-4372-4952-bb93-fe5dd82dde63)
+
 ---
 
 ## New to IQT?
