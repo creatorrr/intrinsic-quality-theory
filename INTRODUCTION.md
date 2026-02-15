@@ -4,6 +4,8 @@
 
 *This introduction covers the core ideas without the math. For the full formal treatment, mathematical proofs, and complete experimental specifications, see the [full paper](./iqt.md). This guide is no substitute for the real thing.*
 
+<video src="https://github.com/creatorrr/intrinsic-quality-theory/raw/main/images/Intrinsic_Quality_Theory.mp4" controls width="100%"></video>
+
 -----
 
 Look at something. Anything in front of you right now. Notice the experience of seeing it.
