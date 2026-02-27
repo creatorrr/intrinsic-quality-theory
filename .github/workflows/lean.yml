@@ -1,0 +1,50 @@
+name: Lean proof check
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'lean/**'
+      - '.github/workflows/lean.yml'
+  pull_request:
+    branches: [main]
+    paths:
+      - 'lean/**'
+      - '.github/workflows/lean.yml'
+
+# Cancel in-progress runs for the same branch/PR
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.run_id }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    name: Check Lean proofs
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: lean
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install elan
+        run: |
+          curl https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh -sSf \
+            | sh -s -- --default-toolchain none -y
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+
+      - name: Print versions
+        run: |
+          lean --version
+          lake --version
+
+      - name: Fetch Mathlib cache
+        run: lake exe cache get
+
+      # Build IQT proof modules individually. We skip IQT.Hello because it
+      # imports all of PhysLean, which is too large to compile from source on
+      # a standard runner. The proof modules only depend on Mathlib.
+      #
+      # Add new modules here as they are created:
+      - name: Build IQT.Region
+        run: env LEAN_ABORT_ON_PANIC=1 lake build IQT.Region

@@ -3,11 +3,15 @@
 from persistent_diamonds_v3.config import (
     DEFAULT_TEACHER_MODEL,
     DistillationConfig,
+    InfraConfig,
+    PRESET_NAMES,
     PersistentDiamondsConfig,
 )
 
 __all__ = [
     "DEFAULT_TEACHER_MODEL",
     "DistillationConfig",
+    "InfraConfig",
+    "PRESET_NAMES",
     "PersistentDiamondsConfig",
 ]
